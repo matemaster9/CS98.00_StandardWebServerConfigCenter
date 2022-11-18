@@ -1,0 +1,8 @@
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    config-url: /v3/api-docs/swagger-config
+    path: doc.html
+
+  api-docs:
+    path: /v3/api-docs/swagger-config
