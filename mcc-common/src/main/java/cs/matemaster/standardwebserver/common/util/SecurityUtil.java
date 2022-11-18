@@ -96,8 +96,8 @@ public class SecurityUtil {
             keyPairGenerator.initialize(level.getCode());
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             return ImmutableMap.<String, String>builder()
-                    .put("PublicKeyStr", Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded()))
-                    .put("PrivateKeyStr", Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded()))
+                    .put("PublicKeyStr", encoderBase64.encodeToString(keyPair.getPublic().getEncoded()))
+                    .put("PrivateKeyStr", encoderBase64.encodeToString(keyPair.getPrivate().getEncoded()))
                     .build();
         } catch (NoSuchAlgorithmException e) {
             return null;
