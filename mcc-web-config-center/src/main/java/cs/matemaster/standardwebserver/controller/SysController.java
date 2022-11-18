@@ -30,4 +30,10 @@ public class SysController {
     public String getToken(@RequestBody SysUserDto request) {
         return null;
     }
+
+    @Operation(summary = "register")
+    @GetMapping("register")
+    public boolean register() {
+        return true;
+    }
 }
