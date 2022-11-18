@@ -89,7 +89,7 @@ public class SecurityUtil {
         }
     }
 
-    public static Map<String, String> getKeyPair(PasswordLength level) {
+    public static Map<String, String> getRSAKeyPair(PasswordLength level) {
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(RSA);
             keyPairGenerator.initialize(level.getCode());

@@ -10,7 +10,7 @@ public class SecurityTest {
 
     @Test
     public void name() {
-        Map<String, String> keyPair = SecurityUtil.getKeyPair(SecurityUtil.PasswordLength.Level_1);
+        Map<String, String> keyPair = SecurityUtil.getRSAKeyPair(SecurityUtil.PasswordLength.Level_1);
         System.out.println(keyPair.get("PublicKeyStr"));
         System.out.println(keyPair.get("PrivateKeyStr"));
     }
