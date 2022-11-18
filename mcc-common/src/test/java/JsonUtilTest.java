@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.type.TypeReference;
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import org.junit.Test;
