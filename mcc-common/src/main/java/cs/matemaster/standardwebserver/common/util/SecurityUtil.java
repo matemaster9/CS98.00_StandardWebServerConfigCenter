@@ -27,8 +27,8 @@ public class SecurityUtil {
     private static final String MD5 = "MD5";
     private static final String saltValue = "MASTER";
     private static final String RSA = "RSA";
-    private static final Base64.Encoder encoderBase64 = Base64.getEncoder();
-    private static final Base64.Decoder decoderBase64 = Base64.getDecoder();
+    public static final Base64.Encoder encoderBase64 = Base64.getEncoder();
+    public static final Base64.Decoder decoderBase64 = Base64.getDecoder();
 
     public static String MD5Encrypt(String plainText) {
         try {
@@ -83,7 +83,7 @@ public class SecurityUtil {
             PrivateKey rsaPrivateKey = Objects.requireNonNull(toRSAPrivateKey(privateKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(RSA);
             crypto.init(Cipher.DECRYPT_MODE, rsaPrivateKey);
-            byte[] bytes = crypto.doFinal(cipher.getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = crypto.doFinal(Hex.decodeHex(cipher));
             return Hex.encodeHexString(bytes);
         } catch (Exception ignore) {
             return null;
