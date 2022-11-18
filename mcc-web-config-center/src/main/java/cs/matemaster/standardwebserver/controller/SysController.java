@@ -1,8 +1,10 @@
 package cs.matemaster.standardwebserver.controller;
 
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
+import cs.matemaster.standardwebserver.mapper.SysUserMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/system")
 @Tag(name = "SysController", description = "系统控制器")
+@AllArgsConstructor
 public class SysController {
+
+    private SysUserMapper sysUserMapper;
 
     @Operation(summary = "welcome")
     @GetMapping("welcome")
@@ -34,6 +39,9 @@ public class SysController {
     @Operation(summary = "register")
     @GetMapping("register")
     public boolean register() {
-        return true;
+        SysUserDto sysUserDto = new SysUserDto();
+        sysUserDto.setAccount("21869481");
+        sysUserDto.setPassword("#OASCBH87");
+        return sysUserMapper.insertSysUser(sysUserDto) != 0;
     }
 }
