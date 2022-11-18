@@ -1,9 +1,12 @@
 package cs.matemaster.standardwebserver.controller;
 
+import cs.matemaster.standardwebserver.model.SysUserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +25,9 @@ public class SysController {
         log.info("进入系统");
     }
 
-
+    @Operation(summary = "获取token")
+    @PostMapping("getToken")
+    public String getToken(@RequestBody SysUserDto request) {
+        return null;
+    }
 }
