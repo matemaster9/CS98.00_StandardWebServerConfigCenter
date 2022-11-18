@@ -3,3 +3,4 @@
 /mcc-web-config-center/target/
 /mcc-common/target/
 /mcc-web-config-center/src/main/resources/application-prd.yml
+/mcc-web/target/
