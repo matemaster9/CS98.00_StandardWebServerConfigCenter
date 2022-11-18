@@ -1,10 +1,13 @@
 package cs.matemaster.standardwebserver.common.util;
 
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -12,6 +15,7 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -85,6 +89,20 @@ public class SecurityUtil {
         }
     }
 
+    public static Map<String, String> getKeyPair(PasswordLength level) {
+        try {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(RSA);
+            keyPairGenerator.initialize(level.getCode());
+            KeyPair keyPair = keyPairGenerator.generateKeyPair();
+            return ImmutableMap.<String, String>builder()
+                    .put("PublicKeyStr", Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded()))
+                    .put("PrivateKeyStr", Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded()))
+                    .build();
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+
     private static PublicKey toRSAPublicKey(String message) {
         try {
             byte[] encodePublicKey = encoderBase64.encode(message.getBytes(StandardCharsets.UTF_8));
@@ -102,6 +120,23 @@ public class SecurityUtil {
             return KeyFactory.getInstance(RSA).generatePrivate(encodedKeySpec);
         } catch (Exception ignore) {
             return null;
+        }
+    }
+
+    public enum PasswordLength {
+        Level_1(1024),
+        Level_2(2048),
+        Level_3(3072),
+        Level_4(4092);
+
+        private final int length;
+
+        PasswordLength(int length) {
+            this.length = length;
+        }
+
+        public int getCode() {
+            return length;
         }
     }
 }
