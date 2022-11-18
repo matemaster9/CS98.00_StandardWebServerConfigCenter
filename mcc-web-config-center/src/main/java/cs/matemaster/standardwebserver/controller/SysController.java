@@ -1,6 +1,6 @@
 package cs.matemaster.standardwebserver.controller;
 
-import cs.matemaster.standardwebserver.model.SysUserDto;
+import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;

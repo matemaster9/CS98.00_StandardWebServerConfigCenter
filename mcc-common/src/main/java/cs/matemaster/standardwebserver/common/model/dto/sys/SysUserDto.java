@@ -1,4 +1,8 @@
-package cs.matemaster.standardwebserver.model;
+package cs.matemaster.standardwebserver.common.model.dto.sys;
+
+/**
+ * @author matemaster
+ */
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

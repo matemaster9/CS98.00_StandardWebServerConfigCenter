@@ -1,3 +1,4 @@
 /.idea/
 
 /mcc-web-config-center/target/
+/mcc-common/target/
