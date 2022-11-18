@@ -14,6 +14,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Objects;
@@ -103,19 +104,19 @@ public class SecurityUtil {
         }
     }
 
-    private static PublicKey toRSAPublicKey(String message) {
+    private static PublicKey toRSAPublicKey(String base64Message) {
         try {
-            byte[] encodePublicKey = encoderBase64.encode(message.getBytes(StandardCharsets.UTF_8));
-            PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(encodePublicKey);
+            byte[] encodePublicKey = decoderBase64.decode(base64Message.getBytes(StandardCharsets.UTF_8));
+            X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(encodePublicKey);
             return KeyFactory.getInstance(RSA).generatePublic(encodedKeySpec);
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
             return null;
         }
     }
 
-    private static PrivateKey toRSAPrivateKey(String message) {
+    private static PrivateKey toRSAPrivateKey(String base64Message) {
         try {
-            byte[] encodePrivateKey = encoderBase64.encode(message.getBytes(StandardCharsets.UTF_8));
+            byte[] encodePrivateKey = decoderBase64.decode(base64Message.getBytes(StandardCharsets.UTF_8));
             PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(encodePrivateKey);
             return KeyFactory.getInstance(RSA).generatePrivate(encodedKeySpec);
         } catch (Exception ignore) {
