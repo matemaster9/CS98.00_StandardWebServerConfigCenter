@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.aop.auth;
+package cs.matemaster.standardwebserver.authority.constant;
 
 /**
  * @author matemaster
@@ -9,5 +9,4 @@ public final class AuthConstants {
     public static final String TokenId = "TokenId";
     public static final long AccessExpireSecond = 30 * 60;
     public static final long RefreshExpireSecond = 24 * 60 * 60;
-    public static final long MaxToleranceMillisecond = 60_000;
 }

@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.aop.auth;
+package cs.matemaster.standardwebserver.authority.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.aop.auth;
+package cs.matemaster.standardwebserver.authority.service;
 
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import io.jsonwebtoken.Claims;

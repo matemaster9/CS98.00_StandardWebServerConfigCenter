@@ -14,6 +14,9 @@ import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 /**
  * @author matemaster
@@ -44,6 +47,11 @@ public final class JsonWebTokenUtil {
 
     public static Claims getClaims(String jwt) {
         return jwtParserBuilder.build().parseClaimsJws(jwt).getBody();
+    }
+
+    public static String getTokenId() {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        return uuid + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
 

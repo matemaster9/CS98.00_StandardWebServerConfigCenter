@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.aop.auth;
+package cs.matemaster.standardwebserver.authority.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * @author matemaster
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 public @interface Authority {
     String value() default "";
 }

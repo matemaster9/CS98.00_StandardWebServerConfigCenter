@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.aop.auth;
+package cs.matemaster.standardwebserver.authority.exception;
 
 import cs.matemaster.standardwebserver.core.BaseCode;
 import cs.matemaster.standardwebserver.core.ErrorCode;

@@ -1,6 +1,11 @@
 package cs.matemaster.standardwebserver.controller;
 
+import cs.matemaster.standardwebserver.authority.config.AuthProperties;
+import cs.matemaster.standardwebserver.authority.service.AuthServiceSupport;
+import cs.matemaster.standardwebserver.authority.util.JsonWebTokenUtil;
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
+import cs.matemaster.standardwebserver.common.util.JsonUtil;
+import cs.matemaster.standardwebserver.common.util.SecurityUtil;
 import cs.matemaster.standardwebserver.mapper.SysUserMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysController {
 
     private SysUserMapper sysUserMapper;
+    private AuthProperties authProperties;
+    private AuthServiceSupport authServiceSupport;
 
     @Operation(summary = "welcome")
     @GetMapping("welcome")
@@ -33,7 +40,9 @@ public class SysController {
     @Operation(summary = "获取token")
     @PostMapping("getToken")
     public String getToken(@RequestBody SysUserDto request) {
-        return null;
+        String message = JsonUtil.serialize(request);
+        String cipher = SecurityUtil.RSAPublicKeyEncrypt(message, authProperties.getRsaPublicKey());
+        return authServiceSupport.getToken(cipher, JsonWebTokenUtil.getTokenId());
     }
 
     @Operation(summary = "register")
