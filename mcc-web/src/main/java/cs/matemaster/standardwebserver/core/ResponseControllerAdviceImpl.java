@@ -1,5 +1,12 @@
 package cs.matemaster.standardwebserver.core;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import io.swagger.v3.core.util.Json;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,11 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.lang.reflect.Method;
+
 /**
  * @author matemaster
  */
 @ControllerAdvice
 public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -45,6 +56,21 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
 
     @Override
     public Object beforeBodyWrite(Object data, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        return new SuccessTip(data);
+
+        // 保证后端统一接口返回操作 不影响 swagger.json
+        Method method = methodParameter.getMethod();
+        if (method != null && "openapiJson".equals(method.getName())) {
+            return data;
+        }
+
+        // 避免返回String类型报错
+        if (data instanceof String) {
+            try {
+                return objectMapper.writeValueAsString(data);
+            } catch (JsonProcessingException ignore) {
+
+            }
+        }
+        return new SuccessTip<>(data);
     }
 }

@@ -8,6 +8,8 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springdoc.core.SpringDocConfigProperties;
+import org.springdoc.core.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +25,12 @@ public class WebConfigCenterApplicationTest {
 
     @Autowired
     private WebSystemConfig webSystemConfig;
+
+    @Autowired
+    private SpringDocConfigProperties springDocConfigProperties;
+
+    @Autowired
+    private SwaggerUiConfigProperties swaggerUiConfigProperties;
 
     @Test
     public void test1() throws DecoderException {
@@ -50,5 +58,11 @@ public class WebConfigCenterApplicationTest {
         String decrypt = SecurityUtil.RSAPublicKeyDecrypt(cipher, webSystemConfig.getRsaPublicKey());
         System.out.println(decrypt);
         System.out.println(new String((Hex.decodeHex(decrypt)), StandardCharsets.UTF_8));
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(springDocConfigProperties);
+        System.out.println(swaggerUiConfigProperties.getVersion());
     }
 }

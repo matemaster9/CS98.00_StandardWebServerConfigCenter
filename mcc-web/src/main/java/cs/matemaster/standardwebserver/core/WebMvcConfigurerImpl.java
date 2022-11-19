@@ -11,15 +11,15 @@ import java.util.List;
 /**
  * @author matemaster
  */
-@Configuration
-public class WebMvcConfigurerImpl implements WebMvcConfigurer {
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        // 去除StringHttpMessageConverter，解决接口统一过程中，返回string导致的类型转换错误
-        converters.removeIf(converter -> converter.getClass() == StringHttpMessageConverter.class);
-
-        // 调整httpMessage转换器顺序
-        // converters.add(0, new MappingJackson2HttpMessageConverter());
-    }
-}
+//@Configuration
+//public class WebMvcConfigurerImpl implements WebMvcConfigurer {
+//
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        // 去除StringHttpMessageConverter，解决接口统一过程中，返回string导致的类型转换错误
+//        converters.removeIf(converter -> converter.getClass() == StringHttpMessageConverter.class);
+//
+//        // 调整httpMessage转换器顺序
+//        // converters.add(0, new MappingJackson2HttpMessageConverter());
+//    }
+//}

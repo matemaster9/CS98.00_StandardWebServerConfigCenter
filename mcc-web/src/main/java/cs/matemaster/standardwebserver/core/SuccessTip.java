@@ -6,11 +6,11 @@ import lombok.Data;
  * @author matemaster
  */
 @Data
-public class SuccessTip extends AbstractTip {
+public class SuccessTip<T> extends AbstractTip {
 
-    private Object data;
+    private T data;
 
-    public SuccessTip(Object data) {
+    public SuccessTip(T data) {
         this.data = data;
         setCode(ErrorCode.SUCCESS.getCode());
         setMessage(ErrorCode.SUCCESS.getMessage());
