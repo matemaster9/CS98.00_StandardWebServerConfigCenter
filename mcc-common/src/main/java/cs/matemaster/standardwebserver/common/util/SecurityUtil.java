@@ -161,6 +161,7 @@ public class SecurityUtil {
     public static String getAESSecretKey(PasswordLength aes) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
+            keyGenerator.init(aes.getCode());
             SecretKey secretKey = keyGenerator.generateKey();
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getEncoded(), AES);
             return encoderBase64.encodeToString(secretKeySpec.getEncoded());
