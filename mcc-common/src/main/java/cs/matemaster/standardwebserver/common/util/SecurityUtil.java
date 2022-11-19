@@ -171,12 +171,8 @@ public class SecurityUtil {
     }
 
     private static Key toAESSecretKey(String base64Message) {
-        try {
-            byte[] bytes = Hex.decodeHex(base64Message);
-            return new SecretKeySpec(bytes, AES);
-        } catch (DecoderException ignore) {
-            return null;
-        }
+        byte[] bytes = decoderBase64.decode(base64Message);
+        return new SecretKeySpec(bytes, AES);
     }
 
     public enum PasswordLength {
