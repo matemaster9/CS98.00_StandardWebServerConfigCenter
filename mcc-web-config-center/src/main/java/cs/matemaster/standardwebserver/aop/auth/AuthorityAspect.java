@@ -1,12 +1,11 @@
 package cs.matemaster.standardwebserver.aop.auth;
 
-import cs.matemaster.standardwebserver.authority.util.JsonWebTokenUtil;
-import cs.matemaster.standardwebserver.common.model.dto.sys.EncryptedSysUser;
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import cs.matemaster.standardwebserver.common.util.SecurityUtil;
 import cs.matemaster.standardwebserver.config.WebSystemConfig;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -18,6 +17,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * @author matemaster
@@ -40,28 +41,29 @@ public class AuthorityAspect {
 
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-        if (requestAttributes != null) {
-            HttpServletRequest request = requestAttributes.getRequest();
-            String authorization = (String) request.getAttribute("Authorization");
-            Claims claims = JsonWebTokenUtil.getClaims(authorization);
-            String encryptedSysUserStr = claims.get("EncryptedSysUser", String.class);
-            String decrypt = SecurityUtil.RSAPrivateKeyDecrypt(encryptedSysUserStr, webSystemConfig.getRsaPrivateKey());
-            EncryptedSysUser encryptedSysUser = JsonUtil.deserialize(decrypt, EncryptedSysUser.class);
-            SysUserDto sysUser = decryptSysUser(encryptedSysUser);
-            if (authServiceSupport.isValidSysUser(sysUser)) {
-
-            }
+        if (Objects.isNull(requestAttributes)) {
+            return;
         }
-    }
 
+        HttpServletRequest request = requestAttributes.getRequest();
+        HttpServletResponse response = requestAttributes.getResponse();
 
-    private SysUserDto decryptSysUser(EncryptedSysUser encryptedSysUser) {
-        String account = SecurityUtil.RSAPrivateKeyDecrypt(encryptedSysUser.getEncryptedAccount(), webSystemConfig.getRsaPrivateKey());
-        String password = SecurityUtil.RSAPrivateKeyDecrypt(encryptedSysUser.getEncryptedPassword(), webSystemConfig.getRsaPrivateKey());
+        if (response == null) {
+            throw new AuthException(MccErrorEnum.MCC_TOKEN_INVALID);
+        }
 
-        SysUserDto sysUserDto = new SysUserDto();
-        sysUserDto.setAccount(account);
-        sysUserDto.setPassword(password);
-        return sysUserDto;
+        try {
+            String jwt = request.getHeader("Authorization");
+            Claims claims = authServiceSupport.getClaims(jwt);
+            String cipher = claims.get(AuthConstants.CipherUser, String.class);
+            String decrypt = SecurityUtil.RSAPrivateKeyDecrypt(cipher, webSystemConfig.getRsaPrivateKey());
+            SysUserDto deserialize = JsonUtil.deserialize(decrypt, SysUserDto.class);
+            request.setAttribute("LoginUser", deserialize);
+        } catch (ExpiredJwtException expiredJwtException) {
+            Claims expiredClaims = expiredJwtException.getClaims();
+            String refreshToken = authServiceSupport.refreshToken(expiredClaims);
+            response.setHeader("Authorization", refreshToken);
+        }
+
     }
 }
