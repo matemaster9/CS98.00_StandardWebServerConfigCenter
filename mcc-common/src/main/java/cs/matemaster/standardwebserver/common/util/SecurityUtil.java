@@ -71,7 +71,7 @@ public class SecurityUtil {
             PublicKey rsaPublicKey = Objects.requireNonNull(toRSAPublicKey(publicKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(RSA);
             crypto.init(Cipher.DECRYPT_MODE, rsaPublicKey);
-            byte[] bytes = crypto.doFinal(cipher.getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = crypto.doFinal(Hex.decodeHex(cipher));
             return Hex.encodeHexString(bytes);
         } catch (Exception ignore) {
             return null;
