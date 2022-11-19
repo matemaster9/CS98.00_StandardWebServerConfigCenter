@@ -37,18 +37,4 @@ public class WebConfigCenterApplicationTest {
         System.out.println(decrypt);
         System.out.println(new String(Hex.decodeHex(decrypt), StandardCharsets.UTF_8));
     }
-
-    @Test
-    public void test2() throws DecoderException {
-        SysUserDto sysUser = new SysUserDto();
-        sysUser.setAccount("12968912984");
-        sysUser.setPassword("#skuVJDWO987");
-        String plainText = JsonUtil.serialize(sysUser);
-
-        String cipher = SecurityUtil.RSAPrivateKeyEncrypt(plainText, webSystemConfig.getRsaPrivateKey());
-        System.out.println(cipher);
-        String decrypt = SecurityUtil.RSAPublicKeyDecrypt(cipher, webSystemConfig.getRsaPublicKey());
-        System.out.println(decrypt);
-        System.out.println(new String(Hex.decodeHex(decrypt), StandardCharsets.UTF_8));
-    }
 }
