@@ -2,7 +2,6 @@ package cs.matemaster.standardwebserver.authority.util;
 
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import cs.matemaster.standardwebserver.common.util.SecurityUtil;
@@ -15,7 +14,6 @@ import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 /**
  * @author matemaster
@@ -25,8 +23,8 @@ public final class JsonWebTokenUtil {
     private JsonWebTokenUtil() {
     }
 
-    private static final JwtBuilder jwtBuilder;
-    private static final JwtParserBuilder jwtParserBuilder;
+    public static final JwtBuilder jwtBuilder;
+    public static final JwtParserBuilder jwtParserBuilder;
 
     public static String getToken(SysUserDto sysUserDto) {
         String message = JsonUtil.serialize(sysUserDto);
