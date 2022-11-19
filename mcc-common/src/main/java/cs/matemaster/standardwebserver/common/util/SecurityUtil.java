@@ -1,10 +1,19 @@
 package cs.matemaster.standardwebserver.common.util;
 
 import com.google.common.collect.ImmutableMap;
+import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -27,6 +36,7 @@ public class SecurityUtil {
     private static final String MD5 = "MD5";
     private static final String saltValue = "MASTER";
     private static final String RSA = "RSA";
+    private static final String AES = "AES";
     public static final Base64.Encoder encoderBase64 = Base64.getEncoder();
     public static final Base64.Decoder decoderBase64 = Base64.getDecoder();
 
@@ -124,11 +134,58 @@ public class SecurityUtil {
         }
     }
 
+    public static String AESEncrypt(String plainText, String secretKey) {
+        try {
+            Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
+            Cipher cipher = Cipher.getInstance(AES);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            byte[] bytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+            return Hex.encodeHexString(bytes);
+        } catch (Exception ignore) {
+            return null;
+        }
+    }
+
+    public static String AESDecrypt(String cipher, String secretKey) {
+        try {
+            Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
+            Cipher crypto = Cipher.getInstance(AES);
+            crypto.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            byte[] bytes = crypto.doFinal(Hex.decodeHex(cipher));
+            return Hex.encodeHexString(bytes);
+        } catch (Exception ignore) {
+            return null;
+        }
+    }
+
+    public static String getAESSecretKey(PasswordLength aes) {
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
+            SecretKey secretKey = keyGenerator.generateKey();
+            SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getEncoded(), AES);
+            return encoderBase64.encodeToString(secretKeySpec.getEncoded());
+        } catch (NoSuchAlgorithmException ignore) {
+            return null;
+        }
+    }
+
+    private static Key toAESSecretKey(String base64Message) {
+        try {
+            byte[] bytes = Hex.decodeHex(base64Message);
+            return new SecretKeySpec(bytes, AES);
+        } catch (DecoderException ignore) {
+            return null;
+        }
+    }
+
     public enum PasswordLength {
         Level_1(1024),
         Level_2(2048),
         Level_3(3072),
-        Level_4(4092);
+        Level_4(4092),
+        AES_1(128),
+        AES_2(192),
+        AES_3(256);
 
         private final int length;
 
