@@ -8,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author matemaster
  */
 @MapperScan(basePackages = "cs.matemaster.standardwebserver.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "cs.matemaster.standardwebserver",
+        "cs.matemaster.standardwebserver.infrastructure.redis"
+})
 public class WebConfigCenterApplication {
 
     public static void main(String[] args) {

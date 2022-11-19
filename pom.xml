@@ -13,6 +13,7 @@
         <module>mcc-common</module>
         <module>mcc-web</module>
         <module>mcc-web-config-center</module>
+        <module>mcc-infrastructure</module>
     </modules>
 
     <dependencyManagement>
