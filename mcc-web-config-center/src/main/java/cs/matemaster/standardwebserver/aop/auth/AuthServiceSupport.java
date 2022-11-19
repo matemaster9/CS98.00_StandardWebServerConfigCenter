@@ -16,5 +16,5 @@ public interface AuthServiceSupport {
 
     String refreshToken(Claims clientClaims);
 
-    String getToken(String cipher, Date nbf, String tokenId);
+    String getToken(String cipher, String tokenId);
 }
