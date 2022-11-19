@@ -8,14 +8,15 @@ import lombok.Data;
 @Data
 public class BaseRuntimeException extends RuntimeException{
 
-    private BaseCode errorCode;
+    private final BaseCode errorCode;
 
-    private Object extraMessage;
+    private final Object extraMessage;
 
 
     public BaseRuntimeException() {
         super(ErrorCode.UNKNOWN.getMessage());
         errorCode = ErrorCode.UNKNOWN;
+        extraMessage = null;
     }
 
     public BaseRuntimeException(BaseCode errorCode) {

@@ -45,7 +45,6 @@ public class AuthorityAspect {
 
     @Before(value = "auth() && (@within(authority) || @annotation(authority))", argNames = "joinPoint,authority")
     public void beforeExec(JoinPoint joinPoint, Authority authority) {
-        Signature signature = joinPoint.getSignature();
 
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 

@@ -1,5 +1,6 @@
 package cs.matemaster.standardwebserver.core;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author matemaster
  */
+@Slf4j
 @ResponseBody
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -19,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ErrorTip getException(Exception err) {
-        System.out.println(err.getMessage());
+        log.error(err.getMessage());
         return new ErrorTip();
     }
 }
