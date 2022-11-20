@@ -1,5 +1,7 @@
 package cs.matemaster.standardwebserver.core;
 
+import cs.matemaster.standardwebserver.common.constant.IErrorCode;
+import cs.matemaster.standardwebserver.common.exception.BaseBusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +18,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BaseRuntimeException.class)
     public ErrorTip getBaseRuntimeException(BaseRuntimeException err) {
         BaseCode errorCode = err.getErrorCode();
+        return new ErrorTip(err.getExtraMessage(), errorCode.getCode(), errorCode.getMessage());
+    }
+
+    @ExceptionHandler(BaseBusinessException.class)
+    public ErrorTip getBaseBusinessException(BaseBusinessException err) {
+        IErrorCode errorCode = err.getErrorCode();
         return new ErrorTip(err.getExtraMessage(), errorCode.getCode(), errorCode.getMessage());
     }
 

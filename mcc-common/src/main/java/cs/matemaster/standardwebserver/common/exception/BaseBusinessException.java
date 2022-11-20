@@ -1,4 +1,4 @@
-package cs.matemaster.standardwebserver.exception;
+package cs.matemaster.standardwebserver.common.exception;
 
 import cs.matemaster.standardwebserver.common.constant.IErrorCode;
 import lombok.Getter;
