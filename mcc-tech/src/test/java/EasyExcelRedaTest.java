@@ -3,10 +3,10 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import cs.matemaster.easyexcel.PathUtil;
 import cs.matemaster.easyexcel.model.Global500CompanyDto;
+import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import org.junit.Test;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,4 +42,23 @@ public class EasyExcelRedaTest {
         result.forEach(System.out::println);
     }
 
+    @Test
+    public void test3() {
+        String path = "/Users/matemaster/Develop/GitHub项目/CS98.00_StandardWebServerConfigCenter/mcc-tech/target/test-classes/全球500强.xlsx";
+
+        List<Global500CompanyDto> result = new ArrayList<>();
+        EasyExcel.read(path, Global500CompanyDto.class, new ReadListener<Global500CompanyDto>() {
+            @Override
+            public void invoke(Global500CompanyDto data, AnalysisContext analysisContext) {
+                result.add(data);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+
+            }
+        }).sheet().doRead();
+
+        System.out.println(JsonUtil.serialize(result));
+    }
 }
