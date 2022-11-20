@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseBusinessException(ConfigCenterErrorEnum.MCCA_PASSWORD_ERROR);
         }
 
-        String cipher = SecurityUtil.AESEncrypt(JsonUtil.serialize(sysUser), securityConfig.getAesSecretKey());
+        String cipher = SecurityUtil.AESEncryptAsHex(JsonUtil.serialize(sysUser), securityConfig.getAesSecretKey());
         String tokenId = JsonWebTokenUtil.getTokenId();
 
         return authServiceSupport.getToken(cipher, tokenId);

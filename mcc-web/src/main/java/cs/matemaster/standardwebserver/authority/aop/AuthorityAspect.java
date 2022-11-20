@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -63,7 +62,7 @@ public class AuthorityAspect {
             String jwt = request.getHeader("Authorization");
             Claims claims = authServiceSupport.getClaims(jwt);
             String cipher = claims.get(AuthConstants.CipherUser, String.class);
-            String decrypt = SecurityUtil.RSAPrivateKeyDecrypt(cipher, webSystemConfig.getRsaPrivateKey());
+            String decrypt = SecurityUtil.RSAPrivateKeyDecryptAsHex(cipher, webSystemConfig.getRsaPrivateKey());
             SysUserDto deserialize = JsonUtil.deserialize(new String(Hex.decodeHex(decrypt), StandardCharsets.UTF_8), SysUserDto.class);
             request.setAttribute("LoginUser", deserialize);
         } catch (ExpiredJwtException expiredJwtException) {

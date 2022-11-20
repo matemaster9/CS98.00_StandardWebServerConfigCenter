@@ -15,14 +15,14 @@ public class SecurityTest {
 
     @Test
     public void name() {
-        Map<String, String> keyPair = SecurityUtil.getRSAKeyPair(SecurityUtil.PasswordLength.Level_1);
+        Map<String, String> keyPair = SecurityUtil.getBase64RSAKeyPair(SecurityUtil.PasswordLength.Level_1);
         System.out.println(keyPair.get("PublicKeyStr"));
         System.out.println(keyPair.get("PrivateKeyStr"));
     }
 
     @Test
     public void test1() {
-        String aesSecretKey = SecurityUtil.getAESSecretKey(SecurityUtil.PasswordLength.AES_3);
+        String aesSecretKey = SecurityUtil.getBase64AESSecretKey(SecurityUtil.PasswordLength.AES_3);
         System.out.println(aesSecretKey);
     }
 
@@ -33,10 +33,10 @@ public class SecurityTest {
         sysUser.setPassword("#skuVJDWO987");
         String message = JsonUtil.serialize(sysUser);
 
-        String secretKey = SecurityUtil.getAESSecretKey(SecurityUtil.PasswordLength.AES_1);
+        String secretKey = SecurityUtil.getBase64AESSecretKey(SecurityUtil.PasswordLength.AES_1);
 
-        String encryptedMessage = SecurityUtil.AESEncrypt(message, secretKey);
-        String decryptedMessage = SecurityUtil.AESDecrypt(encryptedMessage, secretKey);
+        String encryptedMessage = SecurityUtil.AESEncryptAsHex(message, secretKey);
+        String decryptedMessage = SecurityUtil.AESDecryptAsHex(encryptedMessage, secretKey);
 
         System.out.println(encryptedMessage);
         System.out.println(decryptedMessage);

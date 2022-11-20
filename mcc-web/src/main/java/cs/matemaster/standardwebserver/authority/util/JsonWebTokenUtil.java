@@ -31,7 +31,7 @@ public final class JsonWebTokenUtil {
 
     public static String getToken(SysUserDto sysUserDto) {
         String message = JsonUtil.serialize(sysUserDto);
-        String encryptedMessage = SecurityUtil.MD5Encrypt(message);
+        String encryptedMessage = SecurityUtil.MD5EncryptAsHex(message);
 
         ImmutableMap<String, Object> headerMap = ImmutableMap.of("typ", "JWT", "alg", "HS256");
         ImmutableMap<String, Object> claimMap = ImmutableMap.<String, Object>builder().put("SysUser", encryptedMessage).build();

@@ -35,7 +35,7 @@ public class SecurityUtil {
     public static final Base64.Encoder encoderBase64 = Base64.getEncoder();
     public static final Base64.Decoder decoderBase64 = Base64.getDecoder();
 
-    public static String MD5Encrypt(String plainText) {
+    public static String MD5EncryptAsHex(String plainText) {
         try {
             MessageDigest alg = MessageDigest.getInstance(MD5);
             String message = String.join("_", saltValue, plainText);
@@ -46,7 +46,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String RSAPublicKeyEncrypt(String plainText, String publicKey) {
+    public static String RSAPublicKeyEncryptAsHex(String plainText, String publicKey) {
         try {
 
             PublicKey rsaPublicKey = Objects.requireNonNull(toRSAPublicKey(publicKey), "无效密钥");
@@ -59,7 +59,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String RSAPrivateKeyEncrypt(String plainText, String privateKey) {
+    public static String RSAPrivateKeyEncryptAsHex(String plainText, String privateKey) {
         try {
             PrivateKey rsaPrivateKey = Objects.requireNonNull(toRSAPrivateKey(privateKey), "无效密钥");
             Cipher cipher = Cipher.getInstance(RSA);
@@ -71,7 +71,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String RSAPublicKeyDecrypt(String cipher, String publicKey) {
+    public static String RSAPublicKeyDecryptAsHex(String cipher, String publicKey) {
         try {
             PublicKey rsaPublicKey = Objects.requireNonNull(toRSAPublicKey(publicKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(RSA);
@@ -83,7 +83,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String RSAPrivateKeyDecrypt(String cipher, String privateKey) {
+    public static String RSAPrivateKeyDecryptAsHex(String cipher, String privateKey) {
         try {
             PrivateKey rsaPrivateKey = Objects.requireNonNull(toRSAPrivateKey(privateKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(RSA);
@@ -95,7 +95,7 @@ public class SecurityUtil {
         }
     }
 
-    public static Map<String, String> getRSAKeyPair(PasswordLength level) {
+    public static Map<String, String> getBase64RSAKeyPair(PasswordLength level) {
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(RSA);
             keyPairGenerator.initialize(level.getCode());
@@ -129,7 +129,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String AESEncrypt(String plainText, String secretKey) {
+    public static String AESEncryptAsHex(String plainText, String secretKey) {
         try {
             Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
             Cipher cipher = Cipher.getInstance(AES);
@@ -141,7 +141,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String AESDecrypt(String cipher, String secretKey) {
+    public static String AESDecryptAsHex(String cipher, String secretKey) {
         try {
             Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(AES);
@@ -189,7 +189,7 @@ public class SecurityUtil {
         }
     }
 
-    public static String getAESSecretKey(PasswordLength aes) {
+    public static String getBase64AESSecretKey(PasswordLength aes) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
             keyGenerator.init(aes.getCode());

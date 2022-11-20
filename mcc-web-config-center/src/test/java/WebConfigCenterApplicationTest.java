@@ -39,9 +39,9 @@ public class WebConfigCenterApplicationTest {
         sysUser.setPassword("#skuVJDWO987");
 
         String plainText = JsonUtil.serialize(sysUser);
-        String cipher = SecurityUtil.RSAPublicKeyEncrypt(plainText, webSystemConfig.getRsaPublicKey());
+        String cipher = SecurityUtil.RSAPublicKeyEncryptAsHex(plainText, webSystemConfig.getRsaPublicKey());
         System.out.println(cipher);
-        String decrypt = SecurityUtil.RSAPrivateKeyDecrypt(cipher, webSystemConfig.getRsaPrivateKey());
+        String decrypt = SecurityUtil.RSAPrivateKeyDecryptAsHex(cipher, webSystemConfig.getRsaPrivateKey());
         System.out.println(decrypt);
         System.out.println(new String(Hex.decodeHex(decrypt), StandardCharsets.UTF_8));
     }
@@ -53,9 +53,9 @@ public class WebConfigCenterApplicationTest {
         sysUser.setPassword("#skuVJDWO987");
         String plainText = JsonUtil.serialize(sysUser);
 
-        String cipher = SecurityUtil.RSAPrivateKeyEncrypt(plainText, webSystemConfig.getRsaPrivateKey());
+        String cipher = SecurityUtil.RSAPrivateKeyEncryptAsHex(plainText, webSystemConfig.getRsaPrivateKey());
         System.out.println(cipher);
-        String decrypt = SecurityUtil.RSAPublicKeyDecrypt(cipher, webSystemConfig.getRsaPublicKey());
+        String decrypt = SecurityUtil.RSAPublicKeyDecryptAsHex(cipher, webSystemConfig.getRsaPublicKey());
         System.out.println(decrypt);
         System.out.println(new String((Hex.decodeHex(decrypt)), StandardCharsets.UTF_8));
     }

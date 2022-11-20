@@ -41,7 +41,7 @@ public class SysController {
     @PostMapping("getToken")
     public String getToken(@RequestBody SysUserDto request) {
         String message = JsonUtil.serialize(request);
-        String cipher = SecurityUtil.RSAPublicKeyEncrypt(message, authProperties.getRsaPublicKey());
+        String cipher = SecurityUtil.RSAPublicKeyEncryptAsHex(message, authProperties.getRsaPublicKey());
         return authServiceSupport.getToken(cipher, JsonWebTokenUtil.getTokenId());
     }
 
