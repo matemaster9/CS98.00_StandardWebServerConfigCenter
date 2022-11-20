@@ -8,8 +8,11 @@ import cs.matemaster.standardwebserver.config.SecurityConfig;
 import cs.matemaster.standardwebserver.facade.AuthFacade;
 import cs.matemaster.standardwebserver.service.AuthService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -25,16 +28,20 @@ public class AuthFacadeImpl implements AuthFacade {
     @Override
     public String sign(EncryptedSysUser request) {
         request.validate();
-        String account = SecurityUtil.AESDecrypt(request.getEncryptedAccount(), securityConfig.getAesSecretKey());
-        String password = SecurityUtil.AESDecrypt(request.getEncryptedPassword(), securityConfig.getAesSecretKey());
+        String accountHexStr = SecurityUtil.AESDecrypt(request.getEncryptedAccount(), securityConfig.getAesSecretKey());
+        String passwordHexStr = SecurityUtil.AESDecrypt(request.getEncryptedPassword(), securityConfig.getAesSecretKey());
 
-        if (Objects.isNull(account) || Objects.isNull(password)) {
+        if (Objects.isNull(accountHexStr) || Objects.isNull(passwordHexStr)) {
             throw new IllegalParamsException("非法用户信息");
         }
 
         SysUserDto sysUser = new SysUserDto();
-        sysUser.setAccount(account);
-        sysUser.setPassword(password);
+        try {
+            sysUser.setAccount(new String(Hex.decodeHex(accountHexStr), StandardCharsets.UTF_8));
+            sysUser.setPassword(new String(Hex.decodeHex(passwordHexStr), StandardCharsets.UTF_8));
+        } catch (DecoderException e) {
+            throw new IllegalParamsException(e.getMessage());
+        }
 
         return authService.sign(sysUser);
     }
