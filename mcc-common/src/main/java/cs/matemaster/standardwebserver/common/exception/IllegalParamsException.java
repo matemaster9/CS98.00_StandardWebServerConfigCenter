@@ -10,7 +10,7 @@ public class IllegalParamsException extends RuntimeException {
 
     private final IErrorCode errorCode;
 
-    private final Object extraMessage;
+    private final String extraMessage;
 
     public IllegalParamsException() {
         super(ErrorEnum.ILLEGAL_PARAMETER.getMessage());
@@ -18,9 +18,9 @@ public class IllegalParamsException extends RuntimeException {
         extraMessage = null;
     }
 
-    public IllegalParamsException(IErrorCode errorCode, Object extraMessage) {
-        super(errorCode.getMessage());
-        this.errorCode = errorCode;
+    public IllegalParamsException(String extraMessage) {
+        super(ErrorEnum.ILLEGAL_PARAMETER.getMessage());
+        this.errorCode = ErrorEnum.ILLEGAL_PARAMETER;
         this.extraMessage = extraMessage;
     }
 }
