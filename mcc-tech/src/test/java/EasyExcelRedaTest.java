@@ -1,0 +1,45 @@
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.read.listener.ReadListener;
+import cs.matemaster.easyexcel.PathUtil;
+import cs.matemaster.easyexcel.model.Global500CompanyDto;
+import org.junit.Test;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author matemaster
+ */
+public class EasyExcelRedaTest {
+
+    @Test
+    public void test() {
+        System.out.println(PathUtil.getClasspath());
+    }
+
+    @Test
+    public void test1() {
+        String filename = "/Users/matemaster/Develop/GitHub项目/CS98.00_StandardWebServerConfigCenter/mcc-tech/target/test-classes/全球500强.xlsx";
+        File file = Paths.get(filename).toFile();
+
+        List<Global500CompanyDto> result = new ArrayList<>();
+        EasyExcel.read(file, Global500CompanyDto.class, new ReadListener<Global500CompanyDto>() {
+            @Override
+            public void invoke(Global500CompanyDto data, AnalysisContext analysisContext) {
+                result.add(data);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+
+            }
+        }).sheet().doRead();
+
+        result.forEach(System.out::println);
+    }
+
+}

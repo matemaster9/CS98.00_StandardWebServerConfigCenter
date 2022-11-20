@@ -5,3 +5,4 @@
 /mcc-web-config-center/src/main/resources/application-prd.yml
 /mcc-web/target/
 /mcc-infrastructure/mcc-infrastructure-redis/target/
+/mcc-tech/target/

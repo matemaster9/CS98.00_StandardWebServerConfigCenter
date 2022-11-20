@@ -4,3 +4,12 @@ spring:
 
 server:
   port: 8081
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  packages-to-scan: cs.matemaster.standardwebserver.controller
+  swagger-ui:
+    supported-submit-methods: get,post
