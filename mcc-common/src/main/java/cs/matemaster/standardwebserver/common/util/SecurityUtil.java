@@ -177,7 +177,7 @@ public class SecurityUtil {
      * @param secretKey
      * @return
      */
-    public static String AESDecryptAsPlainText(String cipherBase64, String secretKey) {
+    public static String AESDecrypt(String cipherBase64, String secretKey) {
         try {
             Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
             Cipher crypto = Cipher.getInstance(AES);

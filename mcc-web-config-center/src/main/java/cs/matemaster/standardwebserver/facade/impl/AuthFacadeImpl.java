@@ -25,8 +25,8 @@ public class AuthFacadeImpl implements AuthFacade {
     @Override
     public String sign(EncryptedSysUser request) {
         request.validate();
-        String account = SecurityUtil.AESDecryptAsPlainText(request.getEncryptedAccount(), securityConfig.getAesSecretKey());
-        String password = SecurityUtil.AESDecryptAsPlainText(request.getEncryptedPassword(), securityConfig.getAesSecretKey());
+        String account = SecurityUtil.AESDecrypt(request.getEncryptedAccount(), securityConfig.getAesSecretKey());
+        String password = SecurityUtil.AESDecrypt(request.getEncryptedPassword(), securityConfig.getAesSecretKey());
 
         if (Objects.isNull(account) || Objects.isNull(password)) {
             throw new IllegalParamsException("非法用户信息");
