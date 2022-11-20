@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -79,6 +80,9 @@ public class SysController {
     @PostMapping("exportGlobal500")
     public void exportGlobal500(@RequestBody List<Global500CompanyDto> request) throws IOException {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (Objects.isNull(requestAttributes) || Objects.isNull(requestAttributes.getResponse())) {
+            return;
+        }
         List<List<String>> head = ImmutableList.of(
                 Collections.singletonList("排名"),
                 Collections.singletonList("公司名称"),
