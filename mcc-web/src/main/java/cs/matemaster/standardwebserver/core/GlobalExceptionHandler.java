@@ -29,7 +29,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ErrorTip getException(Exception err) {
-        log.error(err.getMessage());
+//        log.error(err.getMessage());
+        log.error(err.toString());
         return new ErrorTip();
     }
 }
