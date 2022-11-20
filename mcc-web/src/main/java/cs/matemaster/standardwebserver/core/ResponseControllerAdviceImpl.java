@@ -66,7 +66,7 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
         // 避免返回String类型报错
         if (data instanceof String) {
             try {
-                return objectMapper.writeValueAsString(data);
+                return objectMapper.writeValueAsString(new SuccessTip<>((String) data));
             } catch (JsonProcessingException ignore) {
 
             }
