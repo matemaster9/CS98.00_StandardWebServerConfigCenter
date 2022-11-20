@@ -22,7 +22,7 @@ public class SecurityTest {
 
     @Test
     public void test1() {
-        String aesSecretKey = SecurityUtil.getAESSecretKey(SecurityUtil.PasswordLength.AES_1);
+        String aesSecretKey = SecurityUtil.getAESSecretKey(SecurityUtil.PasswordLength.AES_3);
         System.out.println(aesSecretKey);
     }
 

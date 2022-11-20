@@ -11,4 +11,6 @@ public interface SysUserMapper {
 
     @Insert("insert into sys_user(account, password) values (#{sysUser.account}, #{sysUser.password})")
     int insertSysUser(@Param("sysUser") SysUserDto sysUserDto);
+
+    SysUserDto getSysUserByAccount(String account);
 }
