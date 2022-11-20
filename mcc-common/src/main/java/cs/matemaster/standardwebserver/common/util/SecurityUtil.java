@@ -153,6 +153,42 @@ public class SecurityUtil {
         }
     }
 
+    /**
+     * AES 加密 plainText -> cipherBase64
+     * @param plainText
+     * @param secretKey
+     * @return
+     */
+    public static String AESEncryptAsBase64(String plainText, String secretKey) {
+        try {
+            Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
+            Cipher cipher = Cipher.getInstance(AES);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            byte[] bytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+            return encoderBase64.encodeToString(bytes);
+        } catch (Exception ignore) {
+            return null;
+        }
+    }
+
+    /**
+     * AES 解密 cipherBase64 -> plainText
+     * @param cipherBase64
+     * @param secretKey
+     * @return
+     */
+    public static String AESDecryptAsPlainText(String cipherBase64, String secretKey) {
+        try {
+            Key secretKeySpec = Objects.requireNonNull(toAESSecretKey(secretKey), "无效密钥");
+            Cipher crypto = Cipher.getInstance(AES);
+            crypto.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            byte[] bytes = crypto.doFinal(decoderBase64.decode(cipherBase64));
+            return new String(bytes, StandardCharsets.UTF_8);
+        } catch (Exception ignore) {
+            return null;
+        }
+    }
+
     public static String getAESSecretKey(PasswordLength aes) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
