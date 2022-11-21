@@ -100,6 +100,6 @@ public class SysController {
                     data.add(item.getCountry());
                     return data;
                 }).collect(Collectors.toList());
-        EasyExcelUtil.exportExcel(requestAttributes.getResponse(), "global500", head, dataList);
+        EasyExcelUtil.exportExcel("global500", head, dataList);
     }
 }
