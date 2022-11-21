@@ -3,6 +3,7 @@ package cs.matemaster.standardwebserver.common.util;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
+import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.web.context.request.RequestAttributes;
@@ -56,6 +57,7 @@ public final class EasyExcelUtil {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + encodeFilename + ".xlsx");
 
-        EasyExcelFactory.write(response.getOutputStream()).head(head).sheet().doWrite(data);
+        EasyExcelFactory.write(response.getOutputStream()).head(head).sheet()
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()).doWrite(data);
     }
 }
