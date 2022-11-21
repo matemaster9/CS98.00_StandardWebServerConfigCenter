@@ -79,10 +79,6 @@ public class SysController {
     @Operation(summary = "解析excel")
     @PostMapping("exportGlobal500")
     public void exportGlobal500(@RequestBody List<Global500CompanyDto> request) throws IOException {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (Objects.isNull(requestAttributes) || Objects.isNull(requestAttributes.getResponse())) {
-            return;
-        }
         List<List<String>> head = ImmutableList.of(
                 Collections.singletonList("排名"),
                 Collections.singletonList("公司名称"),
