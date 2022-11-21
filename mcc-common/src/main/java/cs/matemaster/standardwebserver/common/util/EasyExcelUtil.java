@@ -5,6 +5,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,17 +29,7 @@ public final class EasyExcelUtil {
 
     public static <T> List<T> toGenericList(InputStream excel, Class<T> tClass) {
         List<T> genericList = new ArrayList<>();
-        EasyExcelFactory.read(excel, tClass, new ReadListener<T>() {
-            @Override
-            public void invoke(T data, AnalysisContext analysisContext) {
-                genericList.add(data);
-            }
-
-            @Override
-            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-
-            }
-        }).sheet().doRead();
+        EasyExcelFactory.read(excel, tClass, new GenericReadListener<>(genericList)).sheet().doRead();
         return genericList;
     }
 
@@ -63,5 +54,20 @@ public final class EasyExcelUtil {
                 .sheet()
                 .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
                 .doWrite(data);
+    }
+
+    @AllArgsConstructor
+    private static class GenericReadListener<T> implements ReadListener<T> {
+        private final List<T> dataList;
+
+        @Override
+        public void invoke(T t, AnalysisContext analysisContext) {
+            dataList.add(t);
+        }
+
+        @Override
+        public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+            // ignore
+        }
     }
 }
