@@ -57,7 +57,11 @@ public final class EasyExcelUtil {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + encodeFilename + ".xlsx");
 
-        EasyExcelFactory.write(response.getOutputStream()).head(head).sheet()
-                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()).doWrite(data);
+        EasyExcelFactory
+                .write(response.getOutputStream())
+                .head(head)
+                .sheet()
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
+                .doWrite(data);
     }
 }
