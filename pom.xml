@@ -15,7 +15,6 @@
         <module>mcc-web-config-center</module>
         <module>mcc-infrastructure</module>
         <module>mcc-tech</module>
-        <module>mcc-ddd</module>
     </modules>
 
     <properties>
