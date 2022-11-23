@@ -18,4 +18,14 @@ public class JsonUtilTest {
         SysUserDto deserialize = JsonUtil.deserialize(serialize, SysUserDto.class);
         System.out.println(deserialize);
     }
+
+    @Test
+    public void test2() {
+        SysUserDto sysUser = new SysUserDto();
+        sysUser.setAccount("12968912984");
+        sysUser.setPassword("#skuVJDWO987");
+        String serialize = JsonUtil.serialize(sysUser);
+
+        System.out.println(JsonUtil.pretty(serialize));
+    }
 }
