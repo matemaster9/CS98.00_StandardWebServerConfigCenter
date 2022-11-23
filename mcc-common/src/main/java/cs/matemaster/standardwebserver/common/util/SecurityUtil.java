@@ -1,6 +1,8 @@
 package cs.matemaster.standardwebserver.common.util;
 
 import com.google.common.collect.ImmutableMap;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
@@ -26,6 +28,7 @@ import java.util.Objects;
 /**
  * @author matemaster
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityUtil {
 
     private static final String MD5 = "MD5";
