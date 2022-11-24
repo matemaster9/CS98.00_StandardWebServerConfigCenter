@@ -28,4 +28,8 @@ public final class DataMaskingUtil {
     public static String desensitizeBankAccount(String bankAccount) {
         return null;
     }
+
+    private static String desensitize(String sensitiveMessage) {
+        return null;
+    }
 }
