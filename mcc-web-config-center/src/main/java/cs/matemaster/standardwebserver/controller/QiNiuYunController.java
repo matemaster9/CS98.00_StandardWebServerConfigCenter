@@ -20,7 +20,7 @@ public class QiNiuYunController {
 
     @Operation(summary = "上传文件")
     @PostMapping("uploadFile")
-    public boolean uploadFile(@RequestBody MultipartFile file) {
+    public boolean uploadFile(MultipartFile file) {
         return true;
     }
 }
