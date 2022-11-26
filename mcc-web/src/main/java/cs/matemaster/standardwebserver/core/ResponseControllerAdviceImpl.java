@@ -51,7 +51,9 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
     }
 
     @Override
-    public Object beforeBodyWrite(Object data, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public Object beforeBodyWrite(Object data, MethodParameter methodParameter, MediaType mediaType,
+                                  Class<? extends HttpMessageConverter<?>> aClass,
+                                  ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
         // 保证后端统一接口返回操作 不影响 swagger.json
         Method method = methodParameter.getMethod();
