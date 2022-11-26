@@ -63,7 +63,7 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
             try {
                 return objectMapper.writeValueAsString(new SuccessTip<>((String) data));
             } catch (JsonProcessingException ignore) {
-
+                return null;
             }
         }
         return new SuccessTip<>(data);
