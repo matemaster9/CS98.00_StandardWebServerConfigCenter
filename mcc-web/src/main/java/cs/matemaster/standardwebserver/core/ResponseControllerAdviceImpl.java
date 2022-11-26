@@ -1,7 +1,5 @@
 package cs.matemaster.standardwebserver.core;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -22,8 +20,6 @@ import java.lang.reflect.Method;
  */
 @ControllerAdvice
 public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> {
-
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
