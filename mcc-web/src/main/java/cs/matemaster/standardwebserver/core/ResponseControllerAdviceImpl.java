@@ -2,6 +2,7 @@ package cs.matemaster.standardwebserver.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -59,13 +60,6 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
         }
 
         // 避免返回String类型报错
-        if (data instanceof String) {
-            try {
-                return objectMapper.writeValueAsString(new SuccessTip<>((String) data));
-            } catch (JsonProcessingException ignore) {
-                return null;
-            }
-        }
-        return new SuccessTip<>(data);
+        return (data instanceof String) ? JsonUtil.serialize(new SuccessTip<>(data)) : new SuccessTip<>(data);
     }
 }
