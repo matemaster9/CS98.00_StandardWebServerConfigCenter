@@ -11,7 +11,7 @@ public class HashUtilTests {
     @Test
     public void test1() {
         String message = "Hello World";
-        System.out.println(HashUtil.hmacMD5AsLong(message));
+        System.out.println(HashUtil.hmacMd5AsLong(message));
     }
 
     @Test

@@ -5,7 +5,6 @@ import com.google.common.hash.Hashing;
 
 import javax.annotation.Nonnull;
 import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +20,7 @@ public final class HashUtil {
     private HashUtil() {
     }
 
-    public static long hmacMD5AsLong(Object arg) {
+    public static long hmacMd5AsLong(Object arg) {
         return Objects.isNull(arg) ? 0L : hmacMD5(arg).asLong();
     }
 
