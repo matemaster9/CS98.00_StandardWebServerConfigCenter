@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
  * @author matemaster
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class DataMaskingUtil {
+public final class DesensitizeUtil {
 
     public static String desensitizeName(String name) {
         return null;
