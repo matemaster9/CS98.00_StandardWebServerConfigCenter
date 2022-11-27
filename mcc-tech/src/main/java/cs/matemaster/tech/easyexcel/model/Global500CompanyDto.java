@@ -1,4 +1,4 @@
-package cs.matemaster.easyexcel.model;
+package cs.matemaster.tech.easyexcel.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.EqualsAndHashCode;

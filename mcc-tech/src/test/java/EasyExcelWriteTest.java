@@ -1,6 +1,6 @@
 import com.alibaba.excel.EasyExcel;
 import com.fasterxml.jackson.core.type.TypeReference;
-import cs.matemaster.easyexcel.model.Global500CompanyDto;
+import cs.matemaster.tech.easyexcel.model.Global500CompanyDto;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import org.junit.Test;
 

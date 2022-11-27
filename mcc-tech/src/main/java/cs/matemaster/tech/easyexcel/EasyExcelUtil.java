@@ -1,4 +1,4 @@
-package cs.matemaster.easyexcel;
+package cs.matemaster.tech.easyexcel;
 
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.context.AnalysisContext;

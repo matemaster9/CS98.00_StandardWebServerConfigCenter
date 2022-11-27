@@ -1,4 +1,4 @@
-package cs.matemaster.easyexcel;
+package cs.matemaster.tech.easyexcel;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
