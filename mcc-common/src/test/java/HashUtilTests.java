@@ -19,4 +19,17 @@ public class HashUtilTests {
         byte[] bytes = HashUtil.hmacMD5SecretKeySpecBytes();
         System.out.println(Arrays.toString(bytes));
     }
+
+    @Test
+    public void test3() {
+        String message = "Hello World";
+        System.out.println(HashUtil.hmacMd5AsBase64(message));
+    }
+
+    @Test
+    public void test4() {
+        String message = "Hello World";
+        System.out.println(HashUtil.murmur3AsBase64(message));
+        System.out.println(HashUtil.murmur3AsLong(message));
+    }
 }
