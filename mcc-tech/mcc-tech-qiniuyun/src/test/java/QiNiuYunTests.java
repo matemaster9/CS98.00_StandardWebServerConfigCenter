@@ -16,6 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.Executors;
 
 /**
  * @author matemaster
@@ -134,5 +135,15 @@ public class QiNiuYunTests {
 
         uploadManager.put(message.getBytes(StandardCharsets.UTF_8), null, uploadToken);
         uploadManager.put(new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8)), null, uploadToken, null, null);
+    }
+
+    @Test
+    public void uploadFileChunks() {
+        Configuration configuration = new Configuration(Region.region0());
+        configuration.resumableUploadAPIVersion = Configuration.ResumableUploadAPIVersion.V2;
+        configuration.resumableUploadConcurrentTaskExecutorService = Executors.newSingleThreadExecutor();
+        configuration.resumableUploadMaxConcurrentTaskCount = 1;
+
+        // ......上传代码
     }
 }
