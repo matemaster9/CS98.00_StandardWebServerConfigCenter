@@ -121,6 +121,11 @@ public class QiNiuYunTests {
         private String fsize;
     }
 
+    /**
+     * InputStream byte[]上传
+     *
+     * @throws QiniuException
+     */
     @Test
     public void byteUpload() throws QiniuException {
         String message = "Hello 七牛云";
@@ -137,6 +142,9 @@ public class QiNiuYunTests {
         uploadManager.put(new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8)), null, uploadToken, null, null);
     }
 
+    /**
+     * 断点续传
+     */
     @Test
     public void uploadFileChunks() {
         Configuration configuration = new Configuration(Region.region0());
