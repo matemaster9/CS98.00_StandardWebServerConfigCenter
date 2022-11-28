@@ -12,6 +12,8 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -116,5 +118,21 @@ public class QiNiuYunTests {
         private String hash;
         private String bucket;
         private String fsize;
+    }
+
+    @Test
+    public void byteUpload() throws QiniuException {
+        String message = "Hello 七牛云";
+        String accessKey = "access key";
+        String secretKey = "secret key";
+        String bucket = "bucket name";
+
+        Auth auth = Auth.create(accessKey, secretKey);
+        String uploadToken = auth.uploadToken(bucket);
+        Configuration configuration = new Configuration(Region.region0());
+        UploadManager uploadManager = new UploadManager(configuration);
+
+        uploadManager.put(message.getBytes(StandardCharsets.UTF_8), null, uploadToken);
+        uploadManager.put(new ByteArrayInputStream(message.getBytes(StandardCharsets.UTF_8)), null, uploadToken, null, null);
     }
 }
