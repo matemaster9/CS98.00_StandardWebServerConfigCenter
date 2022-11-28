@@ -1,4 +1,4 @@
-package cs.matemaster.tech;
+package cs.matemaster.tech.easyexcel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author matemaster
  */
 @SpringBootApplication
-public class TechApplication {
+public class EasyExcelApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TechApplication.class, args);
+        SpringApplication.run(EasyExcelApplication.class, args);
     }
 }
