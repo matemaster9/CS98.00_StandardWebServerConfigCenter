@@ -1,4 +1,5 @@
 import com.google.common.collect.ImmutableMap;
+import cs.matemaster.tech.sign.util.JWTUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Base64;
 
 /**
@@ -73,12 +75,10 @@ public class JsonWebTokenTests {
         log.debug(publicKey.getFormat());
         log.debug(publicKey.getAlgorithm());
         log.debug(Base64.getEncoder().encodeToString(publicKey.getEncoded()));
-        log.debug(publicKey.toString());
 
         log.debug(privateKey.getFormat());
         log.debug(privateKey.getAlgorithm());
         log.debug(Base64.getEncoder().encodeToString(privateKey.getEncoded()));
-        log.debug(privateKey.toString());
     }
 
     /**
@@ -112,5 +112,11 @@ public class JsonWebTokenTests {
         log.debug(claimsJws.getSignature());
         log.debug(claimsJws.getHeader().toString());
         log.debug(claimsJws.getBody().toString());
+    }
+
+    @Test
+    public void test4() {
+        byte[] signatureSecretKey = JWTUtil.getSignatureSecretKey();
+        log.debug(Arrays.toString(signatureSecretKey));
     }
 }
