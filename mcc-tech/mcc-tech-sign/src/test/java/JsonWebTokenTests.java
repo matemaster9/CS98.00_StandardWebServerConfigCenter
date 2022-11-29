@@ -80,4 +80,37 @@ public class JsonWebTokenTests {
         log.debug(Base64.getEncoder().encodeToString(privateKey.getEncoded()));
         log.debug(privateKey.toString());
     }
+
+    /**
+     * JWT 标准签名算法需要 :
+     * 1) HMAC-SHA 算法的 SecretKey 或
+     * 2) RSA 算法的私有 RSAKey 或
+     * 3) 椭圆曲线算法的私有 ECKey。
+     * 指定的密钥类型为 sun.security.rsa.RSAPublicKeyImpl
+     */
+    @Test
+    public void test3() {
+        KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS512);
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
+
+        //
+        String token = Jwts.builder()
+                .setHeader(ImmutableMap.<String, Object>builder()
+                        .put("alg", "")
+                        .put("typ", "JWT")
+                        .build())
+                .setClaims(ImmutableMap.<String, Object>builder()
+                        .put("SysUserInfo", "")
+                        .build())
+                .signWith(privateKey)
+                .compact();
+        log.debug(token);
+
+        Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(publicKey).build()
+                .parseClaimsJws(token);
+        log.debug(claimsJws.getSignature());
+        log.debug(claimsJws.getHeader().toString());
+        log.debug(claimsJws.getBody().toString());
+    }
 }
