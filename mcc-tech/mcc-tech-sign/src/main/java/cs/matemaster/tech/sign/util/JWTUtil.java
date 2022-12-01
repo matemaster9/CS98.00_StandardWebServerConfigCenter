@@ -1,6 +1,9 @@
 package cs.matemaster.tech.sign.util;
 
+import com.google.common.collect.ImmutableMap;
 import cs.matemaster.standardwebserver.common.util.SecurityUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -9,8 +12,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Base64;
+import java.util.Map;
 
 /**
  * @author matemaster
@@ -23,7 +25,17 @@ public final class JWTUtil {
     private static final JwtBuilder rsaJwt;
     private static final JwtParser rsaJwtParser;
 
+    public static String getToken(Map<String, Object> payload) {
+        return hmacJwt
+                .setHeader(ImmutableMap.of("alg", "hs512", "typ", "JWT"))
+                .setClaims(payload)
+                .compact();
+    }
 
+    public static Claims getClaims(String token) {
+        Jws<Claims> claimsJws = hmacJwtParser.parseClaimsJws(token);
+        return claimsJws.getBody();
+    }
 
     public static byte[] getSignatureSecretKey() {
         return Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded();

@@ -15,6 +15,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 
 /**
  * @author matemaster
@@ -118,5 +119,38 @@ public class JsonWebTokenTests {
     public void test4() {
         byte[] signatureSecretKey = JWTUtil.getSignatureSecretKey();
         log.debug(Arrays.toString(signatureSecretKey));
+    }
+
+    @Test
+    public void test5() {
+        String jwt = Jwts.builder()
+                .setHeader(ImmutableMap.<String, Object>builder()
+                        .put("alg", "PS512")
+                        .put("typ", "JWT")
+                        .build())
+                .setClaims(ImmutableMap.<String, Object>builder()
+                        .put("SysUser", "111")
+                        .build())
+                .compact();
+        log.debug(jwt);
+    }
+
+    @Test
+    public void test6() {
+        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        String secretKeyString = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+        log.debug(secretKeyString);
+
+        String jws = Jwts.builder()
+                .setHeader(ImmutableMap.<String, Object>builder()
+                        .put("alg", "PS512")
+                        .put("typ", "JWT")
+                        .build())
+                .setClaims(ImmutableMap.<String, Object>builder()
+                        .put("SysUser", "111")
+                        .build())
+                .signWith(Keys.hmacShaKeyFor(secretKey.getEncoded()))
+                .compact();
+        log.debug(jws);
     }
 }
