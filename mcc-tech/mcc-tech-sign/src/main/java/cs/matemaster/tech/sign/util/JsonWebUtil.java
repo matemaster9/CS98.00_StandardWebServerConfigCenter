@@ -11,6 +11,7 @@ import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author matemaster
@@ -32,6 +33,10 @@ public final class JsonWebUtil {
 
     public static Claims getClaims(String jws) {
         return hmacJwtParser.parseClaimsJws(jws).getBody();
+    }
+
+    public static Map<String, Object> getClaimsAsMap(String jws) {
+        return getClaims(jws).entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public static String getSecretKey(SignatureAlgorithm algorithm) {

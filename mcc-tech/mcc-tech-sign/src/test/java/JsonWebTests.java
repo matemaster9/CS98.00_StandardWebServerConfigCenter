@@ -26,5 +26,8 @@ public class JsonWebTests {
         Map<String, Object> claims = Maps.<String, Object>of("SysUser", "1111").build();
         String jws = JsonWebUtil.getJws(headers, claims);
         log.debug(jws);
+
+        Map<String, Object> claimsAsMap = JsonWebUtil.getClaimsAsMap(jws);
+        log.debug(claimsAsMap.toString());
     }
 }
