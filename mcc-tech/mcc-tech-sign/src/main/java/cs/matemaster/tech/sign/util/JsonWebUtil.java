@@ -24,9 +24,9 @@ public final class JsonWebUtil {
     private JsonWebUtil() {
     }
 
-    public static String getJws(Map<String, Object> headers, Map<String, Object> claims) {
+    public static String getJws(Map<String, Object> header, Map<String, Object> claims) {
         return hmacJwt
-                .setHeader(headers)
+                .setHeader(header)
                 .setClaims(claims)
                 .compact();
     }
