@@ -1,5 +1,7 @@
 package cs.matemaster.tech.sign.service;
 
+import cs.matemaster.tech.sign.constant.JsonWebAlgorithmEnum;
+
 import java.security.Key;
 import java.security.KeyPair;
 import java.util.Map;
@@ -9,7 +11,7 @@ import java.util.Map;
  */
 public interface JsonWebTokenSupport {
 
-    String getSymmetricSecretKey();
+    String getSymmetricSecretKey(JsonWebAlgorithmEnum algorithm);
 
     Map<String, String> getAsymmetricSecretKey();
 

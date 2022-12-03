@@ -1,5 +1,6 @@
 package cs.matemaster.tech.sign.service.impl;
 
+import cs.matemaster.tech.sign.constant.JsonWebAlgorithmEnum;
 import cs.matemaster.tech.sign.service.JsonWebTokenSupport;
 
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
  */
 public abstract class AbstractJsonWebTokenSupport implements JsonWebTokenSupport {
     @Override
-    public String getSymmetricSecretKey() {
+    public String getSymmetricSecretKey(JsonWebAlgorithmEnum algorithm) {
         throw new UnsupportedOperationException("getSymmetricSecretKey is not suppoerted");
     }
 
