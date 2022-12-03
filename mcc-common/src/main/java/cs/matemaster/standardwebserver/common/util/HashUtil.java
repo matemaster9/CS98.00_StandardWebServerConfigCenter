@@ -7,10 +7,8 @@ import com.google.common.hash.Hashing;
 
 import javax.annotation.Nonnull;
 import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Map;
@@ -46,39 +44,48 @@ public final class HashUtil {
     }
 
     public static String murmurhash3AsBase64(@Nonnull Object arg) {
-        return "";
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.Murmurhash3_128);
+        return encoder.encodeToString(hashCode.asBytes());
     }
 
     public static long hmacSHA1(@Nonnull Object arg) {
-        return 0;
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA1);
+        return hashCode.bits() <= 32 ? hashCode.asInt() : hashCode.asLong();
     }
 
     public static String hmacSHA1AsBase64(@Nonnull Object arg) {
-        return "";
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA1);
+        return encoder.encodeToString(hashCode.asBytes());
     }
 
     public static long hmacSHA256(@Nonnull Object arg) {
-        return 0;
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA256);
+        return hashCode.bits() <= 32 ? hashCode.asInt() : hashCode.asLong();
     }
 
     public static String hmacSHA256AsBase64(@Nonnull Object arg) {
-        return "";
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA256);
+        return encoder.encodeToString(hashCode.asBytes());
     }
 
     public static long hmacSHA512(@Nonnull Object arg) {
-        return 0;
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA512);
+        return hashCode.bits() <= 32 ? hashCode.asInt() : hashCode.asLong();
     }
 
     public static String hmacSHA512AsBase64(@Nonnull Object arg) {
-        return "";
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.HMAC_SHA512);
+        return encoder.encodeToString(hashCode.asBytes());
     }
 
     public static long sipHash24(@Nonnull Object arg) {
-        return 0;
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.SIP_HASH24);
+        return hashCode.bits() <= 32 ? hashCode.asInt() : hashCode.asLong();
     }
 
     public static String sipHash24AsBase64(@Nonnull Object arg) {
-        return "";
+        HashCode hashCode = getHashCode(arg.toString(), HashAlgorithm.SIP_HASH24);
+        return encoder.encodeToString(hashCode.asBytes());
     }
 
     private static HashCode getHashCode(String content, HashAlgorithm algorithm) {
