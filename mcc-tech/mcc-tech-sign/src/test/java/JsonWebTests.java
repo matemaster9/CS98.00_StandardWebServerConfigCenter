@@ -1,4 +1,4 @@
-import cs.matemaster.tech.sign.util.JsonWebUtil;
+import cs.matemaster.tech.sign.util.JJWTUtil;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.lang.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ public class JsonWebTests {
 
     @Test
     public void test1() {
-        String secretKey = JsonWebUtil.getSecretKey(SignatureAlgorithm.HS512);
+        String secretKey = JJWTUtil.getSecretKey(SignatureAlgorithm.HS512);
         log.debug(secretKey);
     }
 
@@ -24,10 +24,10 @@ public class JsonWebTests {
                 .and("typ", "JWT")
                 .build();
         Map<String, Object> claims = Maps.<String, Object>of("SysUser", "1111").build();
-        String jws = JsonWebUtil.getJws(headers, claims);
+        String jws = JJWTUtil.getJws(headers, claims);
         log.debug(jws);
 
-        Map<String, Object> claimsAsMap = JsonWebUtil.getClaimsAsMap(jws);
+        Map<String, Object> claimsAsMap = JJWTUtil.getClaimsAsMap(jws);
         log.debug(claimsAsMap.toString());
     }
 }

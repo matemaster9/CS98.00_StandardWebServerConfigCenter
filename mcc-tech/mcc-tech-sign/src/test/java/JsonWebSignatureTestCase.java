@@ -41,6 +41,8 @@ public class JsonWebSignatureTestCase {
                 .signWith(secretKey)
                 .compact();
 
+        log.debug(hs512Jws);
+
         Jws<Claims> claimsJws = Jwts
                 .parserBuilder()
                 .setSigningKey(secretKey)
@@ -75,5 +77,37 @@ public class JsonWebSignatureTestCase {
         log.debug(stringJws.getHeader().toString());
         log.debug(stringJws.getBody());
         log.debug(stringJws.getSignature());
+    }
+
+    @Test
+    public void signAndValidate() {
+        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+
+        String hs512Jws = Jwts.builder()
+                .setHeader(ImmutableMap.<String, Object>builder()
+                        .put("alg", "HS512")
+                        .put("typ", "JWT")
+                        .build())
+                .setClaims(ImmutableMap.<String, Object>builder()
+                        .put("iss", "matemaster")
+                        .put("sub", "jws")
+                        .put("aud", "audience")
+                        .put("exp", Date.from(LocalDateTime.now().plusMinutes(1).atZone(ZoneId.systemDefault()).toInstant()))
+                        .put("iat", Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                        .put("nbf", Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                        .put("jti", UUID.randomUUID().toString().replace("-", ""))
+                        .build())
+                .signWith(secretKey)
+                .compact();
+
+        Jws<Claims> claimsJws = Jwts
+                .parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(hs512Jws);
+
+        log.debug(claimsJws.getSignature());
+        log.debug(claimsJws.getBody().toString());
+        log.debug(claimsJws.getHeader().toString());
     }
 }

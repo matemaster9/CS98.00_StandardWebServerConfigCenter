@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 /**
  * @author matemaster
  */
-public final class JsonWebUtil {
+public final class JJWTUtil {
 
     public static final JwtBuilder hmacJwt;
     public static final JwtParser hmacJwtParser;
 
-    private JsonWebUtil() {
+    private JJWTUtil() {
     }
 
     public static String getJws(Map<String, Object> header, Map<String, Object> claims) {
