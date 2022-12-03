@@ -1,3 +1,5 @@
+package jjwt;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.lang.Maps;
 import lombok.extern.slf4j.Slf4j;

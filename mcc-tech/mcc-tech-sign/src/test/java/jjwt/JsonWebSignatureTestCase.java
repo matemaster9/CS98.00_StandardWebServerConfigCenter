@@ -1,3 +1,5 @@
+package jjwt;
+
 import com.google.common.collect.ImmutableMap;
 import cs.matemaster.tech.sign.model.SysUserDto;
 import io.jsonwebtoken.Claims;
