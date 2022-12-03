@@ -9,12 +9,6 @@ import java.util.Map;
 /**
  * @author matemaster
  */
-public class JavaJwtImpl implements JsonWebTokenSupport {
+public class JavaJwtImpl extends AbstractJsonWebTokenSupport implements JsonWebTokenSupport {
 
-    @Override
-    public String getJWS(Map<String, Object> header, Map<String, Object> claims) {
-
-
-        return null;
-    }
 }

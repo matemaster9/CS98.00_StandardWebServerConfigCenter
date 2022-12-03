@@ -1,5 +1,7 @@
 package cs.matemaster.tech.sign.service;
 
+import java.security.Key;
+import java.security.KeyPair;
 import java.util.Map;
 
 /**
@@ -7,7 +9,15 @@ import java.util.Map;
  */
 public interface JsonWebTokenSupport {
 
-    String getJWS(Map<String, Object> header, Map<String, Object> claims);
+    String getSymmetricSecretKey();
 
+    Map<String, String> getAsymmetricSecretKey();
 
+    String sign(String payload);
+
+    String verify(String jws);
+
+    String encrypt(String payload);
+
+    String decrypt(String jwe);
 }
