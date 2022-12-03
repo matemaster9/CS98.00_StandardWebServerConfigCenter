@@ -13,7 +13,7 @@ public interface JsonWebTokenSupport {
 
     Map<String, String> getAsymmetricSecretKey();
 
-    String sign(String payload);
+    String sign(String payload, Map<String, Object> registryClaims);
 
     String verify(String jws);
 

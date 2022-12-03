@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author matemaster
  */
-public class AbstractJsonWebTokenSupport implements JsonWebTokenSupport {
+public abstract class AbstractJsonWebTokenSupport implements JsonWebTokenSupport {
     @Override
     public String getSymmetricSecretKey() {
         throw new UnsupportedOperationException("getSymmetricSecretKey is not suppoerted");
@@ -19,7 +19,7 @@ public class AbstractJsonWebTokenSupport implements JsonWebTokenSupport {
     }
 
     @Override
-    public String sign(String payload) {
+    public String sign(String payload, Map<String, Object> registryClaims) {
         throw new UnsupportedOperationException("sign is not suppoerted");
     }
 
