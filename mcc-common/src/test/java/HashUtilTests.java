@@ -8,4 +8,9 @@ import java.util.Arrays;
  */
 public class HashUtilTests {
 
+    @Test
+    public void test1() {
+        long hello = HashUtil.murmurhash3("Hello111");
+        System.out.println(hello);
+    }
 }
