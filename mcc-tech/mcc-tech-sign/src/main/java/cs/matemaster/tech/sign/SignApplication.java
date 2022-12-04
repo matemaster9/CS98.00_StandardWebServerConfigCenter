@@ -11,7 +11,10 @@ import javax.annotation.PreDestroy;
  * @author matemaster
  */
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "cs.matemaster.tech.sign",
+        "cs.matemaster.standardwebserver.infrastructure.redis"
+})
 public class SignApplication {
     public static void main(String[] args) {
         SpringApplication.run(SignApplication.class, args);

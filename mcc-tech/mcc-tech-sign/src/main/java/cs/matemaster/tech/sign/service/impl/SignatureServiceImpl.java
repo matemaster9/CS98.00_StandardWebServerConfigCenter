@@ -1,6 +1,7 @@
 package cs.matemaster.tech.sign.service.impl;
 
 import com.google.common.collect.ImmutableMap;
+import cs.matemaster.standardwebserver.common.util.DateTimeUtil;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import cs.matemaster.standardwebserver.infrastructure.redis.RedisClientSupport;
 import cs.matemaster.tech.sign.model.SysToken;
@@ -10,7 +11,7 @@ import cs.matemaster.tech.sign.service.SignatureService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -26,20 +27,20 @@ public class SignatureServiceImpl implements SignatureService {
     @Override
     public String issueToken(SysUserDto sysUserDto) {
         ImmutableMap<String, Object> accessPayload = ImmutableMap.<String, Object>builder()
-                .put("jti", "")
-                .put("exp", new Date())
-                .put("iat", new Date())
+                .put("jti", sysUserDto.getUsername())
                 .put("iss", "mcc")
-                .put("nbf", new Date())
+                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now().plusMinutes(30L)))
+                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
+                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
                 .put("SysUser", Objects.requireNonNull(JsonUtil.serialize(sysUserDto)))
                 .build();
 
         ImmutableMap<String, Object> refreshPayload = ImmutableMap.<String, Object>builder()
-                .put("jti", "")
-                .put("exp", new Date())
-                .put("iat", new Date())
+                .put("jti", sysUserDto.getUsername())
                 .put("iss", "mcc")
-                .put("nbf", new Date())
+                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now().plusHours(3L)))
+                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
+                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
                 .put("SysUser", Objects.requireNonNull(JsonUtil.serialize(sysUserDto)))
                 .build();
 
