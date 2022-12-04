@@ -112,7 +112,7 @@ public class SecurityUtil {
         }
     }
 
-    private static PublicKey toRSAPublicKey(String base64Message) {
+    public static PublicKey toRSAPublicKey(String base64Message) {
         try {
             byte[] encodePublicKey = decoderBase64.decode(base64Message.getBytes(StandardCharsets.UTF_8));
             X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(encodePublicKey);
@@ -122,7 +122,7 @@ public class SecurityUtil {
         }
     }
 
-    private static PrivateKey toRSAPrivateKey(String base64Message) {
+    public static PrivateKey toRSAPrivateKey(String base64Message) {
         try {
             byte[] encodePrivateKey = decoderBase64.decode(base64Message.getBytes(StandardCharsets.UTF_8));
             PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(encodePrivateKey);
