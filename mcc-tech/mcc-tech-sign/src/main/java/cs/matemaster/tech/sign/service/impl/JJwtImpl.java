@@ -2,8 +2,6 @@ package cs.matemaster.tech.sign.service.impl;
 
 import cs.matemaster.tech.sign.config.JsonWebProperties;
 import cs.matemaster.tech.sign.service.JsonWebTokenSupport;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.lang.Maps;
 import lombok.AllArgsConstructor;
@@ -38,11 +36,6 @@ public class JJwtImpl extends AbstractJsonWebTokenSupport implements JsonWebToke
 
     @Override
     public Map<String, Object> verify(String jws) {
-        Jws<Claims> claimsJws = Jwts
-                .parserBuilder()
-                .setSigningKey(jsonWebProperties.getHS512Key())
-                .build()
-                .parseClaimsJws(jws);
-        return claimsJws.getBody();
+        return super.verify(jws);
     }
 }
