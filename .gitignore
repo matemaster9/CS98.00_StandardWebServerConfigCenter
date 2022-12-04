@@ -7,3 +7,4 @@
 /mcc-infrastructure/mcc-infrastructure-redis/target/
 /mcc-tech/target/
 /mcc-tech/mcc-tech-sign/target/
+mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml

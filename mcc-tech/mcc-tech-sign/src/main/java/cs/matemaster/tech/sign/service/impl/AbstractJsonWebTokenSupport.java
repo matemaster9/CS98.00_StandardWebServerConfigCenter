@@ -20,22 +20,22 @@ public abstract class AbstractJsonWebTokenSupport implements JsonWebTokenSupport
     }
 
     @Override
-    public String sign(String payload, Map<String, Object> registryClaims) {
+    public String sign(Map<String, Object> payload) {
         throw new UnsupportedOperationException("sign is not suppoerted");
     }
 
     @Override
-    public String verify(String jws) {
+    public Map<String, Object> verify(String jws) {
         throw new UnsupportedOperationException("verify is not suppoerted");
     }
 
     @Override
-    public String encrypt(String payload) {
+    public String encrypt(Map<String, Object> payload) {
         throw new UnsupportedOperationException("encrypt is not suppoerted");
     }
 
     @Override
-    public String decrypt(String jwe) {
+    public Map<String, Object> decrypt(String jwe) {
         throw new UnsupportedOperationException("decrypt is not suppoerted");
     }
 }
