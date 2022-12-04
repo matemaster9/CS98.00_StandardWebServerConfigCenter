@@ -1,6 +1,7 @@
 package cs.matemaster.tech.sign.service.impl;
 
 import com.google.common.collect.ImmutableMap;
+import cs.matemaster.standardwebserver.common.util.BusinessUtil;
 import cs.matemaster.standardwebserver.common.util.DateTimeUtil;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import cs.matemaster.standardwebserver.infrastructure.redis.RedisClientSupport;
@@ -9,9 +10,11 @@ import cs.matemaster.tech.sign.model.SysUserDto;
 import cs.matemaster.tech.sign.service.JsonWebTokenSupport;
 import cs.matemaster.tech.sign.service.SignatureService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -53,5 +56,23 @@ public class SignatureServiceImpl implements SignatureService {
 
         redisClientSupport.setExpiredMessage("SysToken", (String) refreshPayload.get("jti"), JsonUtil.serialize(sysToken), 1000);
         return accessToken;
+    }
+
+    @Override
+    public String renewToken(Map<String, Object> payload) {
+        String tokenId = (String) payload.get("jti");
+        String sysToken = redisClientSupport.getMessage("SysToken", tokenId);
+        if (sysToken == null) {
+            throw new RuntimeException();
+        }
+
+        SysToken token = JsonUtil.deserialize(sysToken, SysToken.class);
+        Map<String, Object> claims = jsonWebTokenSupport.verify(token.getRefreshToken());
+        if (BusinessUtil.isFalse(StringUtils.equals(tokenId, (String) claims.get("jti"))) ||
+                BusinessUtil.isFalse(StringUtils.equals((String) payload.get("SysUser"), (String) claims.get("SysUser")))) {
+            throw new RuntimeException();
+        }
+
+        return jsonWebTokenSupport.sign(payload);
     }
 }
