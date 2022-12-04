@@ -1,12 +1,17 @@
 package jjwt;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.lang.Maps;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import javax.crypto.SecretKey;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
@@ -86,4 +91,11 @@ public class JsonWebTokenTestCase {
     }
 
 
+    @Test
+    public void createSecretKey() {
+        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        String s = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+        System.out.println(s);
+        System.out.println(Arrays.toString(secretKey.getEncoded()));
+    }
 }
