@@ -35,20 +35,10 @@ public final class EasyExcelUtil {
     }
 
     public static void exportExcel(String filename, List<List<String>> head, List<List<Object>> data) throws IOException {
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (Objects.isNull(requestAttributes)) {
+        HttpServletResponse response = getHttpServletResponse(filename);
+        if (response == null) {
             return;
         }
-
-        HttpServletResponse response = requestAttributes.getResponse();
-        if (Objects.isNull(response)) {
-            return;
-        }
-        String encodeFilename = URLEncoder.encode(filename, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + encodeFilename + ".xlsx");
-
         EasyExcelFactory
                 .write(response.getOutputStream())
                 .head(head)
@@ -58,10 +48,23 @@ public final class EasyExcelUtil {
     }
 
     public static <T> void exportExcel(String filename, List<List<T>> data, Class<T> tClass) throws IOException {
+        HttpServletResponse response = getHttpServletResponse(filename);
+        if (response == null) {
+            return;
+        }
+
+        EasyExcelFactory
+                .write(response.getOutputStream(), tClass)
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
+                .sheet()
+                .doWrite(data);
+    }
+
+    private static HttpServletResponse getHttpServletResponse(String filename) throws UnsupportedEncodingException {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletResponse response = servletRequestAttributes.getResponse();
         if (Objects.isNull(response)) {
-            return;
+            return null;
         }
 
         String encodeFilename = URLEncoder.encode(filename, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
@@ -69,11 +72,7 @@ public final class EasyExcelUtil {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + encodeFilename + ".xlsx");
 
-        EasyExcelFactory
-                .write(response.getOutputStream(), tClass)
-                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
-                .sheet()
-                .doWrite(data);
+        return response;
     }
 
     @AllArgsConstructor
