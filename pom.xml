@@ -19,7 +19,7 @@
 
     <properties>
         <mcc.vesion>0.0.1</mcc.vesion>
-        <springboot.version>2.3.12.RELEASE</springboot.version>
+        <springboot.version>2.7.6</springboot.version>
     </properties>
 
     <dependencyManagement>
