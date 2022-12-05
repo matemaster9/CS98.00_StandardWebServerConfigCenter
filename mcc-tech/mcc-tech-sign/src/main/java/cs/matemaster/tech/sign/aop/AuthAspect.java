@@ -1,5 +1,9 @@
 package cs.matemaster.tech.sign.aop;
 
+import cs.matemaster.standardwebserver.common.exception.BaseBusinessException;
+import cs.matemaster.standardwebserver.common.util.JsonUtil;
+import cs.matemaster.tech.sign.constant.JsonWebConst;
+import cs.matemaster.tech.sign.model.SysUserDto;
 import cs.matemaster.tech.sign.service.JsonWebTokenSupport;
 import cs.matemaster.tech.sign.service.SignatureService;
 import io.jsonwebtoken.Claims;
@@ -10,7 +14,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -45,16 +48,19 @@ public class AuthAspect {
         HttpServletResponse response = requestAttributes.getResponse();
 
         if (response == null) {
-            throw new RuntimeException();
+            throw new BaseBusinessException("响应体为空");
         }
 
         String authorization = request.getHeader("Authorization");
         try {
             Map<String, Object> claims = jsonWebTokenSupport.verify(authorization);
+            String sysUserInfo = (String) claims.get(JsonWebConst.SysUserClaim);
+            request.setAttribute("LoginUser", JsonUtil.deserialize(sysUserInfo, SysUserDto.class));
         } catch (ExpiredJwtException expired) {
             Claims claims = expired.getClaims();
             String renewToken = signatureService.renewToken(claims);
             request.setAttribute("Authorization", renewToken);
+            request.setAttribute("LoginUser", JsonUtil.deserialize((String) claims.get(JsonWebConst.SysUserClaim), SysUserDto.class));
         }
     }
 

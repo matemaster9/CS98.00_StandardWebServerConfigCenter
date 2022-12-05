@@ -28,7 +28,6 @@ public class JJwtImpl extends AbstractJsonWebTokenSupport implements JsonWebToke
 
     @Override
     public String sign(Map<String, Object> payload) {
-
         return Jwts.builder()
                 .setHeader(HEADER)
                 .setClaims(payload)
@@ -38,9 +37,11 @@ public class JJwtImpl extends AbstractJsonWebTokenSupport implements JsonWebToke
 
     @Override
     public Map<String, Object> verify(String jws) {
+        // 容忍100毫秒的时间差
         Jws<Claims> claimsJws = Jwts
                 .parserBuilder()
                 .setSigningKey(jsonWebProperties.getHS512Key())
+                .setAllowedClockSkewSeconds(100L)
                 .build()
                 .parseClaimsJws(jws);
         return claimsJws.getBody();
