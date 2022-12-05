@@ -31,13 +31,16 @@ public class SignatureServiceImpl implements SignatureService {
 
     @Override
     public String issueToken(SysUserDto sysUserDto) {
+
+        LocalDateTime now = LocalDateTime.now();
+
         // 30分钟有效期
         ImmutableMap<String, Object> accessPayload = ImmutableMap.<String, Object>builder()
                 .put("jti", sysUserDto.getUsername() + System.currentTimeMillis())
                 .put("iss", "mcc")
-                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now().plusMinutes(30L)))
-                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
-                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
+                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(now.plusMinutes(JsonWebConst.AccessExpiration)))
+                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(now))
+                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(now))
                 .put(JsonWebConst.SysUserClaim, Objects.requireNonNull(JsonUtil.serialize(sysUserDto)))
                 .build();
 
@@ -45,9 +48,9 @@ public class SignatureServiceImpl implements SignatureService {
         ImmutableMap<String, Object> refreshPayload = ImmutableMap.<String, Object>builder()
                 .put("jti", sysUserDto.getUsername() + System.currentTimeMillis())
                 .put("iss", "mcc")
-                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now().plusHours(3L)))
-                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
-                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(LocalDateTime.now()))
+                .put("exp", DateTimeUtil.convertLocalDateTimeToDate(now.plusHours(JsonWebConst.RefreshExpiration)))
+                .put("iat", DateTimeUtil.convertLocalDateTimeToDate(now))
+                .put("nbf", DateTimeUtil.convertLocalDateTimeToDate(now))
                 .put(JsonWebConst.SysUserClaim, Objects.requireNonNull(JsonUtil.serialize(sysUserDto)))
                 .build();
 
