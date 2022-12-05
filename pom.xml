@@ -19,6 +19,7 @@
 
     <properties>
         <mcc.vesion>0.0.1</mcc.vesion>
+        <lombok.version>1.18.24</lombok.version>
         <springboot.version>2.7.6</springboot.version>
     </properties>
 
@@ -57,5 +58,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
