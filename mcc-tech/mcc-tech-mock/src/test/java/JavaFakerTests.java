@@ -4,10 +4,14 @@ import com.github.javafaker.IdNumber;
 import com.github.javafaker.Job;
 import com.github.javafaker.Name;
 import com.github.javafaker.PhoneNumber;
+import cs.matemaster.tech.mock.model.CompanyMock;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author matemaster
@@ -58,5 +62,11 @@ public class JavaFakerTests {
         Faker faker = new Faker(Locale.CHINA);
         Job jobMock = faker.job();
         log.info(jobMock.title());
+    }
+
+    @Test
+    public void company() {
+        CompanyMock companyMock = CompanyMock.mockBuilder().build();
+        log.info(companyMock.toString());
     }
 }
