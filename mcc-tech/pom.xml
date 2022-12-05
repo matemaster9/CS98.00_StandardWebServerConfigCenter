@@ -16,6 +16,7 @@
         <module>mcc-tech-qiniuyun</module>
         <module>mcc-tech-easyexcel</module>
         <module>mcc-tech-sign</module>
+        <module>mcc-tech-mock</module>
     </modules>
 
     <properties>
