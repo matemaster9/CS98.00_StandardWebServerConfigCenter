@@ -21,9 +21,7 @@ public class SignatureFacadeImpl implements SignatureFacade {
 
     @Override
     public String getToken(SysUserDto sysUserDto) {
-
         sysUserService.validate(sysUserDto);
-
         return signatureService.issueToken(sysUserDto);
     }
 }
