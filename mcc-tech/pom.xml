@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <description>系统技术试点</description>
     <modules>
-        <module>mcc-tech-qiniuyun</module>
+        <module>mcc-tech-oss-qiniuyun</module>
     </modules>
 
     <properties>
