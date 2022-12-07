@@ -11,8 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import javax.crypto.SecretKey;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
@@ -111,5 +116,43 @@ public class JsonWebSignatureTestCase {
         log.debug(claimsJws.getSignature());
         log.debug(claimsJws.getBody().toString());
         log.debug(claimsJws.getHeader().toString());
+    }
+
+    /**
+     * jjwt支持对称和非对称两种三类：HMAC RSASSA ECDSA
+     */
+    @Test
+    public void generateSecretKey() {
+        // HMAC using SHA-512
+        Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        // ECDSA using P-521 and SHA-512
+        Keys.keyPairFor(SignatureAlgorithm.ES512);
+        // RSASSA-PKCS-v1_5 using SHA-512
+        Keys.keyPairFor(SignatureAlgorithm.RS512);
+    }
+
+    @Test
+    public void secretKeyDetail() {
+        SecretKey hs512 = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        log.debug(Arrays.toString(hs512.getEncoded()));
+        log.debug(Base64.getEncoder().encodeToString(hs512.getEncoded()));
+
+        KeyPair es512 = Keys.keyPairFor(SignatureAlgorithm.ES512);
+        PublicKey es512Public = es512.getPublic();
+        PrivateKey es512Private = es512.getPrivate();
+
+        log.debug(Arrays.toString(es512Public.getEncoded()));
+        log.debug(Base64.getEncoder().encodeToString(es512Public.getEncoded()));
+        log.debug(Arrays.toString(es512Private.getEncoded()));
+        log.debug(Base64.getEncoder().encodeToString(es512Private.getEncoded()));
+
+        KeyPair rs512 = Keys.keyPairFor(SignatureAlgorithm.RS512);
+        PublicKey rs512Public = rs512.getPublic();
+        PrivateKey rs512Private = rs512.getPrivate();
+
+        log.debug(Arrays.toString(rs512Public.getEncoded()));
+        log.debug(Base64.getEncoder().encodeToString(rs512Public.getEncoded()));
+        log.debug(Arrays.toString(rs512Private.getEncoded()));
+        log.debug(Base64.getEncoder().encodeToString(rs512Private.getEncoded()));
     }
 }
