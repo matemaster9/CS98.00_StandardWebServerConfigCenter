@@ -1,15 +1,11 @@
 package cs.matemaster.tech.config.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author matemaster
- */
-@Setter
+
 @Getter
 @ToString
 @Configuration
@@ -31,4 +27,7 @@ public class RandomValueProperties {
 
     @Value("${random-value.range}")
     private Integer range;
+
+    @Value("${random-value.message}")
+    private String message;
 }

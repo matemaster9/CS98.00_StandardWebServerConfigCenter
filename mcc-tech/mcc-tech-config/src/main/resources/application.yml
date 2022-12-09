@@ -5,6 +5,7 @@ random-value:
   uuid: ${random.uuid}
   less-ten: ${random.int(10)}
   range: ${random.int[1,100]}
+  message: setter注入测试
 
 web.server:
   application:
