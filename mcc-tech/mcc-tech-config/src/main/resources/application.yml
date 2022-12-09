@@ -1,0 +1,58 @@
+random-value:
+  secret: ${random.value}
+  number: ${random.int}
+  big-number: ${random.long(1,9999999999)}
+  uuid: ${random.uuid}
+  less-ten: ${random.int(10)}
+  range: ${random.int[1,100]}
+
+web.server:
+  application:
+    name: InjectMapFromYAML
+    url: http://injectmapfromyaml.dev
+    description: How To Inject a map from a YAML File in Spring Boot
+  config:
+    ip-list:
+      - 10.10.10.10
+      - 10.10.10.11
+      - 10.10.10.12
+      - 10.10.10.13
+    file-system:
+      - /dev/root
+      - /dev/md2
+      - /dev/md4
+  users:
+    root:
+      username: root
+      password: Ti3Ka3x8T8y0cPrfuYIj
+    guest:
+      username: guest
+      password: m8CW0LO3GGIsclO207DE
+
+app.system:
+  month-map:
+    1: [ Jan. ]
+    2: [ Feb. ]
+    3: [ Mar. ]
+    4: [ Apr. ]
+    5: [ May ]
+    6: [ Jun. ]
+    7: [ Jul. ]
+    8: [ Aug. ]
+    9: [ Sep. ]
+    10: [ Oct. ]
+    11: [ Nov. ]
+    12: [ Dec. ]
+  system-users:
+    root: { "username": "mate-master","password": "gLObQK0kZZVMVsOCIhaK" }
+    guest: { "username": "jackson","password": "gWf6Tz5WiOgsUqSUFxam" }
+
+login.user:
+  username: multiConstructor
+  password: Igr226CiaDwXCs14
+  inet-address-list:
+    - 179.74.81.55
+    - 206.34.196.205
+    - 231.160.85.178
+    - 163.85.5.251
+    - 40.197.222.155
