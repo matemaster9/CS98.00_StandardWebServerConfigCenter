@@ -9,23 +9,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DesensitizeUtil {
 
-    public static String desensitizeName(String name) {
+    public static String getName(String name) {
         return null;
     }
 
-    public static String desensitizeMobile(String mobile) {
+    public static String getMobile(String mobile) {
         return null;
     }
 
-    public static String desensitizeIDCard(String idCard) {
+    public static String getFixedPhone(String mobile) {
         return null;
     }
 
-    public static String desensitizeAddress(String address) {
+    public static String getIDCard(String idCard) {
         return null;
     }
 
-    public static String desensitizeBankAccount(String bankAccount) {
+    public static String getAddress(String address) {
+        return null;
+    }
+
+    public static String getBankAccount(String bankAccount) {
+        return null;
+    }
+
+    public static String getEmail(String email) {
         return null;
     }
 

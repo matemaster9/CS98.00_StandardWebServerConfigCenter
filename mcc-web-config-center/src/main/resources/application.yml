@@ -19,3 +19,14 @@ springdoc:
   packages-to-scan: cs.matemaster.standardwebserver.controller
   swagger-ui:
     supported-submit-methods: get,post
+
+activity-prepare:
+  activity-prepare-principal-map:
+    PrizeAward:
+      dev: 11
+      operation: 22
+      well-known-people: 33
+    LiveStreaming:
+      dev: 11
+      operation: 22
+      well-known-people: 33

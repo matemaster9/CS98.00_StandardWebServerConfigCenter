@@ -3,6 +3,7 @@ package cs.matemaster.standardwebserver;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 /**
  * @author matemaster
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         "cs.matemaster.standardwebserver.authority",
         "cs.matemaster.standardwebserver.core"
 })
+@ConfigurationPropertiesScan(basePackages = "cs.matemaster.standardwebserver.config")
 public class WebConfigCenterApplication {
 
     public static void main(String[] args) {
