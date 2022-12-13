@@ -2,10 +2,12 @@ package cs.matemaster.standardwebserver.common.exception;
 
 import cs.matemaster.standardwebserver.common.constant.ErrorEnum;
 import cs.matemaster.standardwebserver.common.constant.IErrorCode;
+import lombok.Getter;
 
 /**
  * @author matemaster
  */
+@Getter
 public class IllegalParamsException extends RuntimeException {
 
     private final IErrorCode errorCode;
