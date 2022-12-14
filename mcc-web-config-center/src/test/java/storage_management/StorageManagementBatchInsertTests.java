@@ -48,6 +48,7 @@ public class StorageManagementBatchInsertTests {
         try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
             StorageManagementMapper mapper = sqlSession.getMapper(StorageManagementMapper.class);
             collect.forEach(mapper::insertStorageDetail);
+            sqlSession.commit();
         }
         System.out.println("执行耗时：" + started.stop().elapsed(TimeUnit.SECONDS));
     }
