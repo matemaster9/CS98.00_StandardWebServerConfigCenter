@@ -1,6 +1,8 @@
 package cs.matemaster.standardwebserver.controller;
 
 import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookStorageDetailDto;
+import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
+import cs.matemaster.standardwebserver.common.model.response.PageDataView;
 import cs.matemaster.standardwebserver.service.StorageManagementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,5 +35,11 @@ public class StorageManagementController {
     @Operation(summary = "保存库存明细信息")
     public Boolean batchSaveStorageDetailInfo(@RequestBody List<BookStorageDetailDto> request) {
         return storageManagementService.batchSaveStorageDetail(request) != 0;
+    }
+
+    @PostMapping("/paging-query-book-storage-detail")
+    @Operation(summary = "分页查询库存明细信息")
+    public PageDataView<List<BookStorageDetailDto>> pagingQueryBookStorageDetail(@RequestBody BookStorageDetailPagingQuery query) {
+        return null;
     }
 }
