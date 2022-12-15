@@ -1,6 +1,7 @@
 import cs.matemaster.tech.spring.SpringEcosystemApplication;
 import cs.matemaster.tech.spring.dependency_injection.ActivityQueryFacadeImpl;
 import cs.matemaster.tech.spring.dependency_injection.SysUserQueryFacadeImpl;
+import cs.matemaster.tech.spring.factory.RubikQuery;
 import cs.matemaster.tech.spring.factory.RubikQueryFactory;
 import cs.matemaster.tech.spring.service.ActivityQueryService;
 import cs.matemaster.tech.spring.service.SysUserQueryService;
@@ -38,17 +39,18 @@ public class SpringEcosystemApplicationTests {
     private SysUserQueryService sysUserQueryService2;
 
     @Test
-    public void name() {
+    public void name() throws Exception {
         String name = applicationContext.getClass().getName();
         System.out.println(name);
 
-        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-        for (String beanDefinitionName : beanDefinitionNames) {
-            System.out.println(beanDefinitionName);
+        if (applicationContext.containsBean("&rubikQueryFactory")) {
+            RubikQueryFactory bean = (RubikQueryFactory) applicationContext.getBean("&rubikQueryFactory");
+            System.out.println(bean.getObject().hashCode());
+            System.out.println(bean.getObject().hashCode());
         }
 
-        RubikQueryFactory bean = (RubikQueryFactory) applicationContext.getBean("&rubikQueryFactory");
-        System.out.println(bean.getObjectType().getName());
+        System.out.println(applicationContext.getBean(RubikQuery.class).hashCode());
+        System.out.println(applicationContext.getBean(RubikQuery.class).hashCode());
     }
 
     @Test
@@ -58,4 +60,17 @@ public class SpringEcosystemApplicationTests {
         System.out.println(sysUserQueryService1.getSysUserList());
         System.out.println(sysUserQueryService2.getSysUserList());
     }
+
+    @Test
+    public void beanDefinitionName() {
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
+
+        // bean别名
+        String alias2 = applicationContext.getBean("alias2", String.class);
+        System.out.println(alias2);
+    }
+
 }
