@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "security")
+@ConfigurationProperties(prefix = SecurityConfig.SECURITY_PREFIX)
 public class SecurityConfig {
+    public static final String SECURITY_PREFIX = "security";
 
     private String aesSecretKey;
 

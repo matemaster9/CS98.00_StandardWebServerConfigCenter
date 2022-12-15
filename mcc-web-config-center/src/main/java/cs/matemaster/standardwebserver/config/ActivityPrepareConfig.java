@@ -12,8 +12,10 @@ import java.util.Map;
  * @author matemaster
  */
 @Getter
-@ConfigurationProperties(prefix = "activity-prepare")
+@ConfigurationProperties(prefix = ActivityPrepareConfig.ACTIVITY_PREPARE_PREFIX)
 public class ActivityPrepareConfig {
+
+    public static final String ACTIVITY_PREPARE_PREFIX = "activity-prepare";
 
     private final Map<ActivityPrepareTypeEnum, ActivityPreparePrincipalDto> activityPreparePrincipalMap;
 

@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "system")
+@ConfigurationProperties(prefix = WebSystemConfig.WBE_SYSTEM_PREFIX)
 public class WebSystemConfig {
+    public static final String WBE_SYSTEM_PREFIX = "system";
     private String rsaPublicKey;
     private String rsaPrivateKey;
 }
