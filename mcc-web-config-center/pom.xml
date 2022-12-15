@@ -16,7 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <qiniu.version>7.12.0</qiniu.version>
-        <mybatis.version>3.0.0</mybatis.version>
+        <mybatis.version>2.2.2</mybatis.version>
         <java-faker.version>1.0.2</java-faker.version>
     </properties>
 

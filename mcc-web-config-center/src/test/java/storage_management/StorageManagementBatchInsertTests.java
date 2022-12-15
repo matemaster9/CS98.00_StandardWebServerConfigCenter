@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,6 +39,9 @@ public class StorageManagementBatchInsertTests {
     @Resource
     private StorageManagementMapper storageManagementMapper;
 
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
+
     /**
      * mybatis批处理插入
      */
@@ -45,10 +49,24 @@ public class StorageManagementBatchInsertTests {
     public void save() {
         List<BookStorageDetailDto> collect = mockData();
         Stopwatch started = Stopwatch.createStarted();
+        // 这里使用mybatis api:DefaultSqlSession 它不会参与到 Spring 的事务管理之中。必须手动提交，并关闭
         try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
+            System.out.println(sqlSession.getClass().getName());
             StorageManagementMapper mapper = sqlSession.getMapper(StorageManagementMapper.class);
             collect.forEach(mapper::insertStorageDetail);
             sqlSession.commit();
+        }
+        System.out.println("执行耗时：" + started.stop().elapsed(TimeUnit.SECONDS));
+    }
+
+    @Test
+    public void batch() {
+        List<BookStorageDetailDto> collect = mockData();
+        Stopwatch started = Stopwatch.createStarted();
+        try (SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory, ExecutorType.BATCH)) {
+            StorageManagementMapper mapper = sqlSessionTemplate.getMapper(StorageManagementMapper.class);
+            collect.forEach(mapper::insertStorageDetail);
+            sqlSessionTemplate.commit();
         }
         System.out.println("执行耗时：" + started.stop().elapsed(TimeUnit.SECONDS));
     }
@@ -91,5 +109,11 @@ public class StorageManagementBatchInsertTests {
                     return storageDetail;
                 }).limit(10)
                 .collect(Collectors.toList());
+    }
+
+
+    @Test
+    public void sqlSessionTemplate() {
+        System.out.println(sqlSessionTemplate);
     }
 }

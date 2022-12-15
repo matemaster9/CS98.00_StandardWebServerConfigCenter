@@ -1,6 +1,7 @@
 package cs.matemaster.standardwebserver.service;
 
 import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookStorageDetailDto;
+import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 
 import java.util.List;
 
@@ -9,7 +10,11 @@ import java.util.List;
  */
 public interface StorageManagementService {
 
-    public int saveStorageDetail(BookStorageDetailDto bookStorageDetail);
+    int saveStorageDetail(BookStorageDetailDto bookStorageDetail);
 
-    public int batchSaveStorageDetail(List<BookStorageDetailDto> bookStorageDetailList);
+    int batchSaveStorageDetail(List<BookStorageDetailDto> bookStorageDetailList);
+
+    int getBookStorageDetailTotalCount();
+
+    List<BookStorageDetailDto> pagingQueryBookStorageDetail(BookStorageDetailPagingQuery query, int offset);
 }
