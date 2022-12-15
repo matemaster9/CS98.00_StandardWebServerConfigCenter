@@ -15,4 +15,8 @@ public final class BusinessUtil {
     public static boolean isFalse(Object arg) {
         return Boolean.FALSE.equals(arg);
     }
+
+    public static int getQueryOffset(int totalCount, int size) {
+        return totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
+    }
 }

@@ -4,6 +4,7 @@ import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookS
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailExportRequest;
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 import cs.matemaster.standardwebserver.common.model.response.PageDataView;
+import cs.matemaster.standardwebserver.common.util.BusinessUtil;
 import cs.matemaster.standardwebserver.facade.StorageManagementFacade;
 import cs.matemaster.standardwebserver.service.StorageManagementService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class StorageManagementFacadeImpl implements StorageManagementFacade {
         // todo: 获取全部数据数量
         int totalCount = storageManagementService.getBookStorageDetailTotalCount();
         // todo：计算分页参数
-        int offset = totalCount % query.getPageSize() == 0 ? totalCount / query.getPageSize() : totalCount / query.getPageSize() + 1;
+        int offset = BusinessUtil.getQueryOffset(totalCount, query.getPageSize());
         // todo：获取分页查询结果
         List<BookStorageDetailDto> bookStorageDetail = storageManagementService.pagingQueryBookStorageDetail(query, offset);
 
