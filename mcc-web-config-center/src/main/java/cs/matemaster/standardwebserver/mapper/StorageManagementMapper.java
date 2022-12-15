@@ -1,8 +1,10 @@
 package cs.matemaster.standardwebserver.mapper;
 
 import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookStorageDetailDto;
+import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -30,4 +32,19 @@ public interface StorageManagementMapper {
             "</foreach>" +
             "</script>"})
     int insertStorageDetailList(@Param("list") List<BookStorageDetailDto> bookStorageDetailList);
+
+    @Select("select count(1) " +
+            "from book_storage_detail ")
+    int findAllBookStorageDetail();
+
+    @Select("select " +
+            "book_name, specifications, original_inventory, inbound_count, inbound_price, outbound_count, outbound_price, " +
+            "balance_inventory, stock_price, remark" +
+            "from book_storage_detail " +
+            "where id >" +
+            "      (select id " +
+            "       from book_storage_detail " +
+            "       where book_storage_detail.record_date > '2022-12-14 16:15:54' " +
+            "       limit 1)")
+    List<BookStorageDetailDto> findBookStorageDetailWithPagingQuery(@Param("pagingQuery") BookStorageDetailPagingQuery query, @Param("offset") int offset);
 }

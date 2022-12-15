@@ -46,11 +46,11 @@ public class StorageManagementServiceImpl implements StorageManagementService {
 
     @Override
     public int getBookStorageDetailTotalCount() {
-        return 0;
+        return storageManagementMapper.findAllBookStorageDetail();
     }
 
     @Override
     public List<BookStorageDetailDto> pagingQueryBookStorageDetail(BookStorageDetailPagingQuery query, int offset) {
-        return null;
+        return storageManagementMapper.findBookStorageDetailWithPagingQuery(query, offset);
     }
 }
