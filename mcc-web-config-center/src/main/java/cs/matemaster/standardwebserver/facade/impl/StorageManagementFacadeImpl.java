@@ -5,9 +5,11 @@ import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailExp
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 import cs.matemaster.standardwebserver.common.model.response.PageDataView;
 import cs.matemaster.standardwebserver.common.util.BusinessUtil;
+import cs.matemaster.standardwebserver.common.util.EasyExcelUtil;
 import cs.matemaster.standardwebserver.facade.StorageManagementFacade;
 import cs.matemaster.standardwebserver.service.StorageManagementService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,6 +42,11 @@ public class StorageManagementFacadeImpl implements StorageManagementFacade {
 
     @Override
     public void exportBookStorageDetail(BookStorageDetailExportRequest request) {
+        // todo: 查询结果
+        List<BookStorageDetailDto> bookStorageDetail = storageManagementService.getBookStorageDetail(request);
+        // todo：-> excel对象
+
+        // todo：导出
 
     }
 }

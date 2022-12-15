@@ -41,10 +41,12 @@ public interface StorageManagementMapper {
             "book_name, specifications, original_inventory, inbound_count, inbound_price, outbound_count, outbound_price, " +
             "balance_inventory, stock_price, remark" +
             "from book_storage_detail " +
-            "where id >" +
-            "      (select id " +
-            "       from book_storage_detail " +
-            "       where book_storage_detail.record_date > '2022-12-14 16:15:54' " +
-            "       limit 1)")
+            "where book_storage_detail as a " +
+            "         inner join " +
+            "     (select id " +
+            "      from book_storage_detail " +
+            "      where book_storage_detail.record_date > '2022-12-14 16:15:54' " +
+            "      limit 10) as b " +
+            "     on a.id = b.id")
     List<BookStorageDetailDto> findBookStorageDetailWithPagingQuery(@Param("pagingQuery") BookStorageDetailPagingQuery query, @Param("offset") int offset);
 }

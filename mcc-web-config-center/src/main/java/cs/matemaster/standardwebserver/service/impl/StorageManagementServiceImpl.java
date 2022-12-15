@@ -2,6 +2,7 @@ package cs.matemaster.standardwebserver.service.impl;
 
 import cs.matemaster.standardwebserver.common.exception.BaseTransactionException;
 import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookStorageDetailDto;
+import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailExportRequest;
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 import cs.matemaster.standardwebserver.constant.ConfigCenterErrorEnum;
 import cs.matemaster.standardwebserver.mapper.StorageManagementMapper;
@@ -52,5 +53,10 @@ public class StorageManagementServiceImpl implements StorageManagementService {
     @Override
     public List<BookStorageDetailDto> pagingQueryBookStorageDetail(BookStorageDetailPagingQuery query, int offset) {
         return storageManagementMapper.findBookStorageDetailWithPagingQuery(query, offset);
+    }
+
+    @Override
+    public List<BookStorageDetailDto> getBookStorageDetail(BookStorageDetailExportRequest request) {
+        return null;
     }
 }
