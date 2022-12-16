@@ -14,23 +14,23 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @AllArgsConstructor
 @ConditionalOnProperty(value = "infrastructure.redis.enable", havingValue = "true")
-public class RedisClientConfig {
+public class RedisClientConfiguration {
 
-    private RedisProperties redisProperties;
+    private RedisConfig redisConfig;
 
     @Bean
     public Jedis jedisClient() {
         JedisPoolConfig config = new JedisPoolConfig();
-        config.setLifo(redisProperties.isInfo());
-        config.setMaxIdle(redisProperties.getMaxIdle());
-        config.setMinIdle(redisProperties.getMinIdle());
-        config.setMaxTotal(redisProperties.getMaxTotal());
-        config.setFairness(redisProperties.isFairness());
-        config.setJmxEnabled(redisProperties.isJmxEnabled());
-        config.setTestWhileIdle(redisProperties.isTestWhileIdle());
-        config.setBlockWhenExhausted(redisProperties.isBlockWhenExhausted());
+        config.setLifo(redisConfig.isInfo());
+        config.setMaxIdle(redisConfig.getMaxIdle());
+        config.setMinIdle(redisConfig.getMinIdle());
+        config.setMaxTotal(redisConfig.getMaxTotal());
+        config.setFairness(redisConfig.isFairness());
+        config.setJmxEnabled(redisConfig.isJmxEnabled());
+        config.setTestWhileIdle(redisConfig.isTestWhileIdle());
+        config.setBlockWhenExhausted(redisConfig.isBlockWhenExhausted());
 
-        try (JedisPool jedisPool = new JedisPool(config, redisProperties.getHost(), redisProperties.getPort(), 2000, redisProperties.getPassword())) {
+        try (JedisPool jedisPool = new JedisPool(config, redisConfig.getHost(), redisConfig.getPort(), 2000, redisConfig.getPassword())) {
             return jedisPool.getResource();
         }
     }
