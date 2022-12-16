@@ -1,9 +1,11 @@
 package cs.matemaster.standardwebserver.facade.impl;
 
+import cs.matemaster.standardwebserver.common.constant.ErrorEnum;
 import cs.matemaster.standardwebserver.common.model.dto.storage_management.BookStorageDetailDto;
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailExportRequest;
 import cs.matemaster.standardwebserver.common.model.request.BookStorageDetailPagingQuery;
 import cs.matemaster.standardwebserver.common.model.response.PageDataView;
+import cs.matemaster.standardwebserver.common.util.BizAssertUtil;
 import cs.matemaster.standardwebserver.common.util.BusinessUtil;
 import cs.matemaster.standardwebserver.common.util.EasyExcelUtil;
 import cs.matemaster.standardwebserver.facade.StorageManagementFacade;
@@ -25,6 +27,8 @@ public class StorageManagementFacadeImpl implements StorageManagementFacade {
 
     @Override
     public PageDataView<List<BookStorageDetailDto>> pagingQueryBookStorageDetail(BookStorageDetailPagingQuery query) {
+
+        query.checkParams();
 
         // todo: 获取全部数据数量
         int totalCount = storageManagementService.getBookStorageDetailTotalCount();
