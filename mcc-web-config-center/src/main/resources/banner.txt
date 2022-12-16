@@ -1,0 +1,2 @@
+App: CS98.00_StandardWebServerConfigCenter
+spring-boot.version: ${spring-boot.version}

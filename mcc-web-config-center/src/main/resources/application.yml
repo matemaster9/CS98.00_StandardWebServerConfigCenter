@@ -7,6 +7,9 @@ spring:
       file-size-threshold: 10MB
       max-request-size: 10MB
       max-file-size: 10MB
+  banner:
+    charset: utf-8
+    location: banner.txt
 
 server:
   port: 8081
