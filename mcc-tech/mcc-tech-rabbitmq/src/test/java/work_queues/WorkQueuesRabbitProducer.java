@@ -1,22 +1,19 @@
-package cs.matemaster.tech.rabbitmq.service.impl;
+package work_queues;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import cs.matemaster.tech.rabbitmq.service.RabbitProduceService;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * @author matemaster
  */
-@Service
-public class WorkQueuesProduceImpl implements RabbitProduceService {
+public class WorkQueuesRabbitProducer {
+
     @SneakyThrows
-    @Override
-    public void sendMessage(String message) {
+    public static void main(String[] args) {
         // todo：创建mq连接
         ConnectionFactory connectionFactory = new ConnectionFactory();
 
@@ -25,6 +22,8 @@ public class WorkQueuesProduceImpl implements RabbitProduceService {
         connectionFactory.setUsername("mcc");
         connectionFactory.setPassword("matemaster98");
         connectionFactory.setPort(5672);
+
+        String message = "RabbitMq: WorkQueues";
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
             channel.queueDeclare("WORK_QUEUES", false, false, false, null);
             channel.basicPublish("", "WORK_QUEUES", null, (message + 1).getBytes(StandardCharsets.UTF_8));

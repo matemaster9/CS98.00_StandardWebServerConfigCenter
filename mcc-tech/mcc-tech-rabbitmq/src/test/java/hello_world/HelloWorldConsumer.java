@@ -1,14 +1,19 @@
+package hello_world;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * @author matemaster
  */
-public class WorkQueuesRabbitProducer {
+@Slf4j
+public class HelloWorldConsumer {
 
     @SneakyThrows
     public static void main(String[] args) {
@@ -21,12 +26,11 @@ public class WorkQueuesRabbitProducer {
         connectionFactory.setPassword("matemaster98");
         connectionFactory.setPort(5672);
 
-        String message = "RabbitMq: WorkQueues";
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
-            channel.queueDeclare("WORK_QUEUES", false, false, false, null);
-            channel.basicPublish("", "WORK_QUEUES", null, (message + 1).getBytes(StandardCharsets.UTF_8));
-            channel.basicPublish("", "WORK_QUEUES", null, (message + 2).getBytes(StandardCharsets.UTF_8));
-            channel.basicPublish("", "WORK_QUEUES", null, (message + 3).getBytes(StandardCharsets.UTF_8));
+            channel.queueDeclare("HELLO_WORLD", false, false, false, null);
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> log.info(new String(delivery.getBody(), StandardCharsets.UTF_8));
+            channel.basicConsume("HELLO_WORLD", true, deliverCallback, consumerTag -> {
+            });
         }
     }
 }

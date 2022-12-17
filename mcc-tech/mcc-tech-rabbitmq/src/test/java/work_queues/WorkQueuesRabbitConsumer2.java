@@ -1,4 +1,4 @@
-package cs.matemaster.tech.rabbitmq.service.impl;
+package work_queues;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -6,30 +6,18 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
-import cs.matemaster.tech.rabbitmq.service.RabbitConsumeService;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author matemaster
  */
-@Slf4j
-@Service
-public class WorkQueuesConsume2Impl implements RabbitConsumeService {
-
-    @Override
-    public String getMessage() {
-        return null;
-    }
+public class WorkQueuesRabbitConsumer2 {
 
     @SneakyThrows
-    @Override
-    public void consumeMessage() {
+    public static void main(String[] args) {
         // todo：创建mq连接
         ConnectionFactory connectionFactory = new ConnectionFactory();
 

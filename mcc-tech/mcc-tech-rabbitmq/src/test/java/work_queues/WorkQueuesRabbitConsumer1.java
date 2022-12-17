@@ -1,3 +1,5 @@
+package work_queues;
+
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,7 +10,6 @@ import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author matemaster
@@ -25,7 +26,6 @@ public class WorkQueuesRabbitConsumer1 {
         connectionFactory.setUsername("mcc");
         connectionFactory.setPassword("matemaster98");
         connectionFactory.setPort(5672);
-        TimeUnit.SECONDS.sleep(5);
 
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
             channel.queueDeclare("WORK_QUEUES", false, false, false, null);
