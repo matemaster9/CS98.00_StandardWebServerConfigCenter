@@ -31,11 +31,11 @@ public class HelloWorldConsumeImpl implements RabbitConsumeService {
 
         final String[] message = new String[1];
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
-            channel.queueDeclare("QUEUE_NAME", false, false, false, null);
+            channel.queueDeclare("HELLO_WORLD", false, false, false, null);
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 message[0] = new String(delivery.getBody(), StandardCharsets.UTF_8);
             };
-            channel.basicConsume("QUEUE_NAME", true, deliverCallback, consumerTag -> {
+            channel.basicConsume("HELLO_WORLD", true, deliverCallback, consumerTag -> {
             });
         }
         return message[0];

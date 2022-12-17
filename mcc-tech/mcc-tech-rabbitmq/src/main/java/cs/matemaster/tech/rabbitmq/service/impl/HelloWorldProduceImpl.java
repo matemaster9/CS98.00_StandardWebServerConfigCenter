@@ -28,8 +28,8 @@ public class HelloWorldProduceImpl implements RabbitProduceService {
         connectionFactory.setPassword("matemaster98");
         connectionFactory.setPort(5672);
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
-            channel.queueDeclare("QUEUE_NAME", false, false, false, null);
-            channel.basicPublish("", "QUEUE_NAME", null, message.getBytes(StandardCharsets.UTF_8));
+            channel.queueDeclare("HELLO_WORLD", false, false, false, null);
+            channel.basicPublish("", "HELLO_WORLD", null, message.getBytes(StandardCharsets.UTF_8));
         }
     }
 }
