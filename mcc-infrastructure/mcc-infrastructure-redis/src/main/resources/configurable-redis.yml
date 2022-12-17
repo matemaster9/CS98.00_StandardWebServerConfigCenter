@@ -1,0 +1,15 @@
+infrastructure:
+  redis:
+    enable: true
+    host: redis-server.ip
+    port: 6379
+    password: redis-password
+    max-wait-mills: -1
+    max-total: 8
+    max-idle: 8
+    min-idle: 0
+    test-while-idle: true
+    block-when-exhausted: true
+    info: true
+    fairness: false
+    jmx-enabled: true
