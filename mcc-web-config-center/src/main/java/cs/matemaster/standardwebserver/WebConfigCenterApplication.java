@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @SpringBootApplication(scanBasePackages = {
         "cs.matemaster.standardwebserver",
         "cs.matemaster.standardwebserver.infrastructure.redis",
+        "cs.matemaster.standardwebserver.infrastructure.es",
         "cs.matemaster.standardwebserver.authority",
         "cs.matemaster.standardwebserver.core"
 })

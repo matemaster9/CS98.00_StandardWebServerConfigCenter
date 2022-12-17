@@ -21,6 +21,7 @@
         <mcc.vesion>0.0.1</mcc.vesion>
         <lombok.version>1.18.24</lombok.version>
         <springboot.version>2.7.6</springboot.version>
+        <jakarta-json.version>2.0.1</jakarta-json.version>
     </properties>
 
     <dependencyManagement>
@@ -47,6 +48,12 @@
 
             <dependency>
                 <groupId>cs.matemaster</groupId>
+                <artifactId>mcc-infrastructure-elasticsearch</artifactId>
+                <version>${mcc.vesion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cs.matemaster</groupId>
                 <artifactId>mcc-web</artifactId>
                 <version>${mcc.vesion}</version>
             </dependency>
@@ -55,6 +62,13 @@
                 <groupId>cs.matemaster</groupId>
                 <artifactId>mcc-web-config-center</artifactId>
                 <version>${mcc.vesion}</version>
+            </dependency>
+
+            <!--修复springboot与es8依赖不一致-->
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${jakarta-json.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
