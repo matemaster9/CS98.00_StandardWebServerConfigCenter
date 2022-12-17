@@ -6,4 +6,6 @@ package cs.matemaster.tech.rabbitmq.service;
 public interface RabbitConsumeService {
 
     String getMessage();
+
+    void consumeMessage();
 }
