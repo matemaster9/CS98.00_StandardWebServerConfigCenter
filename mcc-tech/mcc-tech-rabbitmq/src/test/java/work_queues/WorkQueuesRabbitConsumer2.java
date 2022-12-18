@@ -28,7 +28,6 @@ public class WorkQueuesRabbitConsumer2 {
         connectionFactory.setPort(5672);
 
         try (Connection connection = connectionFactory.newConnection(); Channel channel = connection.createChannel()) {
-            channel.queueDeclare("WORK_QUEUES", false, false, false, null);
             DefaultConsumer consumer = new DefaultConsumer(channel) {
                 @Override
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
