@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author matemaster
  */
 @SpringBootTest(classes = RabbitMqIntegratedApplication.class)
-public class RabbitMqIntegratedApplicationTests {
+class RabbitMqIntegratedApplicationTests {
 
     @Autowired
     private ConnectionFactory connectionFactory;
 
     @Test
-    public void instance() {
+    void instance() {
         System.out.println(connectionFactory);
         System.out.println(connectionFactory.getClass().getName());
     }
