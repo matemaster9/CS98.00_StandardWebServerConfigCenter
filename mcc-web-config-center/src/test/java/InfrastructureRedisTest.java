@@ -2,7 +2,7 @@ import cs.matemaster.standardwebserver.WebConfigCenterApplication;
 import cs.matemaster.standardwebserver.common.model.dto.sys.SysUserDto;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import cs.matemaster.standardwebserver.infrastructure.redis.RedisClientSupport;
-import cs.matemaster.standardwebserver.infrastructure.redis.RedisConfig;
+import cs.matemaster.standardwebserver.infrastructure.redis.RedisClientProps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class InfrastructureRedisTest {
 
     @Autowired
-    private RedisConfig redisConfig;
+    private RedisClientProps redisClientProps;
     @Autowired
     private RedisClientSupport redisClientSupport;
 
     @Test
     public void test1() {
-        System.out.println(redisConfig);
+        System.out.println(redisClientProps);
     }
 
     @Test
