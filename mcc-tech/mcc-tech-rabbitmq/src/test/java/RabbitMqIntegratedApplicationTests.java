@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 
 /**
@@ -67,5 +68,11 @@ class RabbitMqIntegratedApplicationTests {
         ConnectionFactory connectionFactory1 = rabbitTemplate.getConnectionFactory();
         boolean publisherReturns = connectionFactory1.isPublisherReturns();
         System.out.println(publisherReturns);
+    }
+
+    @Test
+    void receive() {
+        Message message = rabbitTemplate.receive("pub_sub_fanout_q1", 1000);
+        System.out.println(new String(Objects.requireNonNull(message).getBody(), StandardCharsets.UTF_8));
     }
 }
