@@ -26,16 +26,16 @@ import javax.net.ssl.SSLContext;
 @Slf4j
 @Configuration
 @AllArgsConstructor
-@EnableConfigurationProperties({ESConfig.class})
+@EnableConfigurationProperties({ElasticSearchProps.class})
 @ConditionalOnProperty(value = "infrastructure.elasticsearch.enable", havingValue = "true")
-public class ESConfiguration {
+public class ElasticSearchConfig {
 
-    private final ESConfig esConfig;
+    private final ElasticSearchProps elasticSearchProps;
 
     @Bean
     public ElasticsearchClient elasticsearchClient() {
         RestClient restClient = RestClient
-                .builder(new HttpHost(esConfig.getAddress(), esConfig.getPort(), esConfig.getScheme()))
+                .builder(new HttpHost(elasticSearchProps.getAddress(), elasticSearchProps.getPort(), elasticSearchProps.getScheme()))
                 .setHttpClientConfigCallback(getHttpClientConfigCallback())
                 .build();
         RestClientTransport restClientTransport = new RestClientTransport(restClient, new JacksonJsonpMapper());
@@ -46,7 +46,7 @@ public class ESConfiguration {
         return httpAsyncClientBuilder -> {
             // 配置es 用户密码认证
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(esConfig.getUsername(), esConfig.getPassword()));
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(elasticSearchProps.getUsername(), elasticSearchProps.getPassword()));
             httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
 
             // 配置es ssl访问

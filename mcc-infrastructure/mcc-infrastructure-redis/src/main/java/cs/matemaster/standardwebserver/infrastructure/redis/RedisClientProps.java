@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "infrastructure.redis")
-public class RedisConfig {
+public class RedisClientProps {
     private boolean enable;
     private String host;
     private int port;

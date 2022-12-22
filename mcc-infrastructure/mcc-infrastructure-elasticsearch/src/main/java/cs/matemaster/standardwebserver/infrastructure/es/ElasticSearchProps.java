@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
  */
 @Getter
 @ConfigurationProperties(prefix = "infrastructure.elasticsearch")
-public class ESConfig {
+public class ElasticSearchProps {
 
     private final Boolean enable;
 
@@ -39,7 +39,7 @@ public class ESConfig {
     private final String scheme;
 
     @ConstructorBinding
-    public ESConfig(Boolean enable, String username, String password, Integer port, String address, String scheme) {
+    public ElasticSearchProps(Boolean enable, String username, String password, Integer port, String address, String scheme) {
         this.enable = enable;
         this.username = username;
         this.password = password;
