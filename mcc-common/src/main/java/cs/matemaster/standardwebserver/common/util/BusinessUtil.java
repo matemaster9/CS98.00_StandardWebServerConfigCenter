@@ -28,8 +28,8 @@ public final class BusinessUtil {
         String copy = kebabCase.toLowerCase(Locale.ROOT);
         String[] split = StringUtils.split(copy, '-');
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < split.length; i++) {
-            builder.append(StringUtils.capitalize(split[i]));
+        for (String s : split) {
+            builder.append(StringUtils.capitalize(s));
         }
         return builder.toString();
     }
@@ -49,8 +49,8 @@ public final class BusinessUtil {
         String copy = snakeCase.toLowerCase(Locale.ROOT);
         String[] split = StringUtils.split(copy, '_');
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < split.length; i++) {
-            builder.append(StringUtils.capitalize(split[i]));
+        for (String s : split) {
+            builder.append(StringUtils.capitalize(s));
         }
         return builder.toString();
     }
