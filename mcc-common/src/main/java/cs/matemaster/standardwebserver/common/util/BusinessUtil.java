@@ -19,4 +19,20 @@ public final class BusinessUtil {
     public static int getQueryOffset(int totalCount, int size) {
         return totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
     }
+
+    public static String kebabToUpperCamel(String kebabCase) {
+        return null;
+    }
+
+    public static String kebabToLowerCamel(String kebabCase) {
+        return null;
+    }
+
+    public static String toUpperCamel(String lowerCamel) {
+        return null;
+    }
+
+    public static String toLowerCamel(String upperCamel) {
+        return null;
+    }
 }
