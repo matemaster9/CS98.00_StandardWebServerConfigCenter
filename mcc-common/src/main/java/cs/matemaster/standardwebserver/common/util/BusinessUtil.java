@@ -1,5 +1,9 @@
 package cs.matemaster.standardwebserver.common.util;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
+
 /**
  * @author matemaster
  */
@@ -21,18 +25,44 @@ public final class BusinessUtil {
     }
 
     public static String kebabToUpperCamel(String kebabCase) {
-        return null;
+        String copy = kebabCase.toLowerCase(Locale.ROOT);
+        String[] split = StringUtils.split(copy, '-');
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < split.length; i++) {
+            builder.append(StringUtils.capitalize(split[i]));
+        }
+        return builder.toString();
     }
 
     public static String kebabToLowerCamel(String kebabCase) {
-        return null;
+        String copy = kebabCase.toLowerCase(Locale.ROOT);
+        String[] split = StringUtils.split(copy, '-');
+        StringBuilder builder = new StringBuilder();
+        builder.append(split[0]);
+        for (int i = 1; i < split.length; i++) {
+            builder.append(StringUtils.capitalize(split[i]));
+        }
+        return builder.toString();
     }
 
-    public static String toUpperCamel(String lowerCamel) {
-        return null;
+    public static String snakeToUpperCamel(String snakeCase) {
+        String copy = snakeCase.toLowerCase(Locale.ROOT);
+        String[] split = StringUtils.split(copy, '_');
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < split.length; i++) {
+            builder.append(StringUtils.capitalize(split[i]));
+        }
+        return builder.toString();
     }
 
-    public static String toLowerCamel(String upperCamel) {
-        return null;
+    public static String snakeToLowerCamel(String snakeCase) {
+        String copy = snakeCase.toLowerCase(Locale.ROOT);
+        String[] split = StringUtils.split(copy, '_');
+        StringBuilder builder = new StringBuilder();
+        builder.append(split[0]);
+        for (int i = 1; i < split.length; i++) {
+            builder.append(StringUtils.capitalize(split[i]));
+        }
+        return builder.toString();
     }
 }
