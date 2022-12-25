@@ -22,12 +22,6 @@
         <dependency>
             <groupId>cs.matemaster</groupId>
             <artifactId>mcc-common</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springdoc</groupId>
-                    <artifactId>springdoc-openapi-ui</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

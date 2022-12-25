@@ -53,6 +53,14 @@ public class ResponseControllerAdviceImpl implements ResponseBodyAdvice<Object> 
     public Object beforeBodyWrite(Object data, MethodParameter methodParameter, MediaType mediaType,
                                   Class<? extends HttpMessageConverter<?>> aClass,
                                   ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        /*
+         * 保证后端统一接口返回操作 不影响 swagger.json([SpringBoot:2.3.12RELEASE]版本出现此bug，可以使用该方法消除)
+         * Method method = methodParameter.getMethod();
+         * if (method != null && "openapiJson".equals(method.getName())) {
+         *             return data;
+         * }
+         */
+
         // 避免返回String类型报错
         return (data instanceof String) ? JsonUtil.serialize(new SuccessTip<>(data)) : new SuccessTip<>(data);
     }
