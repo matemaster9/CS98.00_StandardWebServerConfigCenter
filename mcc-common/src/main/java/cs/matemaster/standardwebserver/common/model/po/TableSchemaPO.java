@@ -1,6 +1,8 @@
 package cs.matemaster.standardwebserver.common.model.po;
 
+import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -8,6 +10,7 @@ import java.time.LocalDate;
  * @author matemaster
  */
 @Data
+@NoArgsConstructor
 public class TableSchemaPO {
 
     private long id;
@@ -27,4 +30,7 @@ public class TableSchemaPO {
     private LocalDate updateTime;
 
     private boolean deleteFlag;
+
+    public TableSchemaPO(TableSchemaDto tableSchemaDto) {
+    }
 }
