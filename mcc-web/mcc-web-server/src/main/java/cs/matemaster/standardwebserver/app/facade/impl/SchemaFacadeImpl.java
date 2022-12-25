@@ -4,6 +4,7 @@ import cs.matemaster.standardwebserver.app.collaborator.MySQLSyntaxGenerator;
 import cs.matemaster.standardwebserver.app.collaborator.PersistentObjectBuilder;
 import cs.matemaster.standardwebserver.app.collaborator.SimulatedDataGenerator;
 import cs.matemaster.standardwebserver.app.facade.SchemaFacade;
+import cs.matemaster.standardwebserver.app.service.SchemaService;
 import cs.matemaster.standardwebserver.common.model.dto.ColumnSchemaDto;
 import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import cs.matemaster.standardwebserver.common.model.request.GenerateSchemaRequest;
@@ -30,12 +31,16 @@ public class SchemaFacadeImpl implements SchemaFacade {
 
     private final SimulatedDataGenerator simulatedDataGenerator;
 
+    private final SchemaService schemaService;
+
     @Override
     public GenerateSchemaVO generateSchema(GenerateSchemaRequest request) {
         request.validate();
         TableSchemaDto tableSchemaDto = new TableSchemaDto(request);
         String createTableSQL = mySQLSyntaxGenerator.getCreateTableSQL(tableSchemaDto);
         String createIndexSQL = mySQLSyntaxGenerator.getCreateIndexSQL(tableSchemaDto);
+
+        schemaService.storeTableSchema(tableSchemaDto);
 
         GenerateSchemaVO generateSchemaVO = new GenerateSchemaVO();
         generateSchemaVO.setCreateTableSQL(createTableSQL);

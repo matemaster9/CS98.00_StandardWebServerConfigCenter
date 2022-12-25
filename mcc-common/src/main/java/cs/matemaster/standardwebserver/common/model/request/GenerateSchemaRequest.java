@@ -31,6 +31,9 @@ public class GenerateSchemaRequest {
     @Schema(description = "表索引")
     private List<Indexes> indexList;
 
+    @Schema(description = "是否持久化")
+    private boolean enablePersist;
+
     public void validate() {
         BizAssertUtil.illegalParams(databaseName == null, "数据库名称必填");
         BizAssertUtil.illegalParams(tableName == null, "数据库表名必填");
