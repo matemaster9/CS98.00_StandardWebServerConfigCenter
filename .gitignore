@@ -22,6 +22,7 @@ mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml
 # mcc-web
 /mcc-web/target/
 /mcc-web/mcc-web-core/target/
+/mcc-web/mcc-web-server/target/
 
 # mcc-web-config-center
 /mcc-web-config-center/target/

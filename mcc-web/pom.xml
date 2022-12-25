@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mcc-web-core</module>
+        <module>mcc-web-server</module>
     </modules>
 
     <properties>
