@@ -6,10 +6,14 @@ import cs.matemaster.standardwebserver.app.service.SchemaService;
 import cs.matemaster.standardwebserver.common.exception.BaseTransactionException;
 import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import cs.matemaster.standardwebserver.common.model.po.TableSchemaPO;
+import cs.matemaster.standardwebserver.common.model.request.TableSchemaPagingQuery;
+import cs.matemaster.standardwebserver.common.model.vo.TableSchemaVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author matemaster
@@ -31,5 +35,15 @@ public class SchemaServiceImpl implements SchemaService {
             throw new BaseTransactionException(AppErrorEnum.STORE_TABLE_SCHEMA_ERROR);
         }
         log.info("保存成功 table_name: {} create_time: {}", tableSchemaDto.getTableName(), tableSchemaPO.getCreateTime());
+    }
+
+    @Override
+    public int getTableSchemaTotalCount() {
+        return 0;
+    }
+
+    @Override
+    public List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int offset) {
+        return null;
     }
 }

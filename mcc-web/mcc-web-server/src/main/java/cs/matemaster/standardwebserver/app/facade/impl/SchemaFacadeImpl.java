@@ -9,8 +9,12 @@ import cs.matemaster.standardwebserver.common.model.dto.ColumnSchemaDto;
 import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import cs.matemaster.standardwebserver.common.model.request.GenerateSchemaRequest;
 import cs.matemaster.standardwebserver.common.model.request.MockSchemaRequest;
+import cs.matemaster.standardwebserver.common.model.request.TableSchemaPagingQuery;
+import cs.matemaster.standardwebserver.common.model.response.PageDataView;
 import cs.matemaster.standardwebserver.common.model.vo.GenerateSchemaVO;
 import cs.matemaster.standardwebserver.common.model.vo.MockSchemaVO;
+import cs.matemaster.standardwebserver.common.model.vo.TableSchemaVO;
+import cs.matemaster.standardwebserver.common.util.BusinessUtil;
 import cs.matemaster.standardwebserver.common.util.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -63,5 +67,19 @@ public class SchemaFacadeImpl implements SchemaFacade {
         mockSchemaVO.setSimulatedData(simulatedData);
         mockSchemaVO.setJsonSimulatedData(jsonSimulatedData);
         return mockSchemaVO;
+    }
+
+    @Override
+    public PageDataView<List<TableSchemaVO>> pagingTableSchema(TableSchemaPagingQuery query) {
+
+        int totalCount = schemaService.getTableSchemaTotalCount();
+        int queryOffset = BusinessUtil.getQueryOffset(totalCount, query.getPageSize());
+        List<TableSchemaVO> data = schemaService.pagingTableSchema(query, queryOffset);
+
+        return PageDataView.<List<TableSchemaVO>>builder()
+                .pageNo(query.getPageNo())
+                .pageSize(query.getPageSize())
+                .data(data)
+                .build();
     }
 }

@@ -44,6 +44,6 @@ public class SchemaController {
     @Operation(summary = "分页查询表模式信息")
     @PostMapping("/table/page")
     public PageDataView<List<TableSchemaVO>> pagingTableSchema(@RequestBody TableSchemaPagingQuery query) {
-        return null;
+        return schemaFacade.pagingTableSchema(query);
     }
 }
