@@ -46,7 +46,7 @@ public class SchemaFacadeImpl implements SchemaFacade {
         String createIndexSQL = mySQLSyntaxGenerator.getCreateIndexSQL(tableSchemaDto);
 
         if (request.isEnablePersist()) {
-            schemaService.persistTableSchema(tableSchemaDto);
+            schemaService.persistTableSchemaInfo(tableSchemaDto, createTableSQL, createIndexSQL);
         }
 
         GenerateSchemaVO generateSchemaVO = new GenerateSchemaVO();

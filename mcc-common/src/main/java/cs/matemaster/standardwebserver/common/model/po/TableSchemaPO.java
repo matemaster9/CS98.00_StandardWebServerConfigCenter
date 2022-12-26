@@ -17,8 +17,6 @@ public class TableSchemaPO {
 
     private String tableName;
 
-    private String comment;
-
     private String columns;
 
     private String createTableSQL;
@@ -31,6 +29,12 @@ public class TableSchemaPO {
 
     private boolean deleteFlag;
 
-    public TableSchemaPO(TableSchemaDto tableSchemaDto) {
+    public void init(TableSchemaDto tableSchemaDto, String createTableSQL, String createIndexSQL) {
+        setTableName(tableSchemaDto.getTableName());
+        setCreateTableSQL(createTableSQL);
+        setCreateIndexSQL(createIndexSQL);
+        setCreateTime(LocalDate.now());
+        setUpdateTime(LocalDate.now());
+        setDeleteFlag(false);
     }
 }

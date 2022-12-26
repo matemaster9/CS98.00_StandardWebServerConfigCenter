@@ -27,8 +27,9 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     @Transactional(rollbackFor = BaseTransactionException.class)
-    public void persistTableSchema(TableSchemaDto tableSchemaDto) {
-        TableSchemaPO tableSchemaPO = new TableSchemaPO(tableSchemaDto);
+    public void persistTableSchemaInfo(TableSchemaDto tableSchemaDto, String tableSQL, String indexSQL) {
+        TableSchemaPO tableSchemaPO = new TableSchemaPO();
+        tableSchemaPO.init(tableSchemaDto, tableSQL, indexSQL);
         try {
             tableSchemaInfoMapper.insertTableSchema(tableSchemaPO);
         } catch (Exception e) {
