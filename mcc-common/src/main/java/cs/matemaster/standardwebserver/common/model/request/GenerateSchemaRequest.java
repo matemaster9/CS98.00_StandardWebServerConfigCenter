@@ -123,6 +123,11 @@ public class GenerateSchemaRequest {
         private boolean primary;
 
         /**
+         * 是否唯一
+         */
+        private boolean unique;
+
+        /**
          * 键包含的列
          */
         private List<String> columns;
