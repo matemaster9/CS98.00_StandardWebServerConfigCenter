@@ -9,6 +9,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 /**
  * @author matemaster
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class PersistentObjectGenerator {
@@ -43,7 +45,9 @@ public class PersistentObjectGenerator {
         StringWriter stringWriter = new StringWriter();
         Template template = configuration.getTemplate("JavaCode.ftl");
         template.process(persistentObject, stringWriter);
-        return stringWriter.toString();
+        String javaCode = stringWriter.toString();
+        log.info("persistent object: {}", javaCode);
+        return javaCode;
     }
 
     private PersistentObjectDto.Field convertColumns2Field(TableSchemaDto.Columns columns) {
