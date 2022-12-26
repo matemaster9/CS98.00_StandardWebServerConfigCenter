@@ -1,7 +1,7 @@
 package cs.matemaster.standardwebserver.app.facade.impl;
 
 import cs.matemaster.standardwebserver.app.collaborator.MySQLSyntaxGenerator;
-import cs.matemaster.standardwebserver.app.collaborator.PersistentObjectBuilder;
+import cs.matemaster.standardwebserver.app.collaborator.PersistentObjectGenerator;
 import cs.matemaster.standardwebserver.app.collaborator.SimulatedDataGenerator;
 import cs.matemaster.standardwebserver.app.facade.SchemaFacade;
 import cs.matemaster.standardwebserver.app.service.SchemaService;
@@ -31,7 +31,7 @@ public class SchemaFacadeImpl implements SchemaFacade {
 
     private final MySQLSyntaxGenerator mySQLSyntaxGenerator;
 
-    private final PersistentObjectBuilder persistentObjectBuilder;
+    private final PersistentObjectGenerator persistentObjectGenerator;
 
     private final SimulatedDataGenerator simulatedDataGenerator;
 
@@ -41,12 +41,16 @@ public class SchemaFacadeImpl implements SchemaFacade {
     public GenerateSchemaVO generateSchema(GenerateSchemaRequest request) {
         request.validate();
         TableSchemaDto tableSchemaDto = new TableSchemaDto(request);
+        String persistentObj = persistentObjectGenerator.getJavaCode(tableSchemaDto);
         String createTableSQL = mySQLSyntaxGenerator.getCreateTableSQL(tableSchemaDto);
         String createIndexSQL = mySQLSyntaxGenerator.getCreateIndexSQL(tableSchemaDto);
 
-        schemaService.storeTableSchema(tableSchemaDto);
+        if (request.isEnablePersist()) {
+            schemaService.persistTableSchema(tableSchemaDto);
+        }
 
         GenerateSchemaVO generateSchemaVO = new GenerateSchemaVO();
+        generateSchemaVO.setPersistentObj(persistentObj);
         generateSchemaVO.setCreateTableSQL(createTableSQL);
         generateSchemaVO.setCreateIndexSQL(createIndexSQL);
         return generateSchemaVO;
@@ -59,11 +63,9 @@ public class SchemaFacadeImpl implements SchemaFacade {
         List<Map<String, Object>> simulatedData = simulatedDataGenerator.getColumnDataList(columnSchemaDto);
         String insertDataSQL = mySQLSyntaxGenerator.getInsertDataSQL(simulatedData);
         String jsonSimulatedData = JsonUtil.pretty(JsonUtil.serialize(simulatedData));
-        String persistentObj = persistentObjectBuilder.getJavaCode(columnSchemaDto);
 
         MockSchemaVO mockSchemaVO = new MockSchemaVO();
         mockSchemaVO.setInsertDataSQL(insertDataSQL);
-        mockSchemaVO.setPersistentObj(persistentObj);
         mockSchemaVO.setSimulatedData(simulatedData);
         mockSchemaVO.setJsonSimulatedData(jsonSimulatedData);
         return mockSchemaVO;

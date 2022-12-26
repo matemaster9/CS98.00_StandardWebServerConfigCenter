@@ -15,9 +15,6 @@ public class MockSchemaVO {
     @Schema(description = "插入数据SQL")
     private String insertDataSQL;
 
-    @Schema(description = "持久化对象")
-    private String persistentObj;
-
     @Schema(description = "模拟数据")
     private List<Map<String, Object>> simulatedData;
 

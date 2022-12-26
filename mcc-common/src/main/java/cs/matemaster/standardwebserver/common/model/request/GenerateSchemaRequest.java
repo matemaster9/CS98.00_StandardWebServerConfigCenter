@@ -41,7 +41,7 @@ public class GenerateSchemaRequest {
 
         columnList.forEach(columns -> {
             BizAssertUtil.illegalParams(columns.getColumnName() == null, "列名必填");
-            BizAssertUtil.illegalParams(columns.getDataType() == null, "列名必填");
+            BizAssertUtil.illegalParams(columns.getDataType() == null, "数据类型必填");
         });
 
         if (CollectionUtils.isEmpty(keyList)) {

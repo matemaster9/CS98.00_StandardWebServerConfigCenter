@@ -27,7 +27,7 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     @Transactional(rollbackFor = BaseTransactionException.class)
-    public void storeTableSchema(TableSchemaDto tableSchemaDto) {
+    public void persistTableSchema(TableSchemaDto tableSchemaDto) {
         TableSchemaPO tableSchemaPO = new TableSchemaPO(tableSchemaDto);
         try {
             tableSchemaInfoMapper.insertTableSchema(tableSchemaPO);
@@ -39,11 +39,11 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public int getTableSchemaTotalCount() {
-        return 0;
+        return tableSchemaInfoMapper.queryTableSchemaTotalCount();
     }
 
     @Override
     public List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int offset) {
-        return null;
+        return tableSchemaInfoMapper.findTableSchemaByPagingQuery(query, offset);
     }
 }

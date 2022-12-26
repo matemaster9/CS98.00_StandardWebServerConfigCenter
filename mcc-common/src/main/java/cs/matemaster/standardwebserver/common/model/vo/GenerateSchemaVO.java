@@ -15,4 +15,7 @@ public class GenerateSchemaVO {
 
     @Schema(description = "创建索引SQL")
     private String createIndexSQL;
+
+    @Schema(description = "持久化对象")
+    private String persistentObj;
 }

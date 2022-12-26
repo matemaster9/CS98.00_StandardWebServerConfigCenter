@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SchemaService {
 
-    void storeTableSchema(TableSchemaDto tableSchemaDto);
+    void persistTableSchema(TableSchemaDto tableSchemaDto);
 
 
     int getTableSchemaTotalCount();
