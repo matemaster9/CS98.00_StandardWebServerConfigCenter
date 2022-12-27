@@ -60,8 +60,9 @@ public class SchemaFacadeImpl implements SchemaFacade {
     public MockSchemaVO getMockSchema(MockSchemaRequest request) {
         request.validate();
         ColumnSchemaDto columnSchemaDto = new ColumnSchemaDto();
+        columnSchemaDto.assemble(request);
         List<Map<String, Object>> simulatedData = simulatedDataGenerator.getColumnDataList(columnSchemaDto);
-        String insertDataSQL = mySQLSyntaxGenerator.getInsertDataSQL(simulatedData);
+        String insertDataSQL = mySQLSyntaxGenerator.getInsertDataSQL(columnSchemaDto, simulatedData);
         String jsonSimulatedData = JsonUtil.pretty(JsonUtil.serialize(simulatedData));
 
         MockSchemaVO mockSchemaVO = new MockSchemaVO();
@@ -75,13 +76,14 @@ public class SchemaFacadeImpl implements SchemaFacade {
     public PageDataView<List<TableSchemaVO>> pagingTableSchema(TableSchemaPagingQuery query) {
 
         int totalCount = schemaService.getTableSchemaTotalCount();
-        int queryOffset = BusinessUtil.getQueryOffset(totalCount, query.getPageSize());
-        List<TableSchemaVO> data = schemaService.pagingTableSchema(query, queryOffset);
+        int startIndex = BusinessUtil.getQueryStartIndex(query.getPageNo(), query.getPageSize());
+        List<TableSchemaVO> data = schemaService.pagingTableSchema(query, startIndex, query.getPageSize());
 
         return PageDataView.<List<TableSchemaVO>>builder()
                 .pageNo(query.getPageNo())
                 .pageSize(query.getPageSize())
                 .data(data)
+                .totalCount(totalCount)
                 .build();
     }
 }

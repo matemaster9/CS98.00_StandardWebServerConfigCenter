@@ -2,6 +2,10 @@ package cs.matemaster.standardwebserver.common.model.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 /**
  * @author matemaster
@@ -10,28 +14,22 @@ import lombok.Data;
 @Schema(name = "mock模式请求")
 public class MockSchemaRequest {
 
-    @Schema(description = "数据库名称")
-    private String databaseName;
-
     @Schema(description = "表名")
     private String tableName;
 
-    @Schema(description = "列名")
-    private String columnName;
-
-    @Schema(description = "备注")
-    private String comment;
-
-    @Schema(description = "数据类型")
-    private String dataType;
-
-    @Schema(description = "是否 auto_increment")
-    private boolean autoIncrement = false;
-
-    @Schema(description = "自增起点")
-    private long autoIncrementStart;
+    @Schema(description = "列信息")
+    private List<Columns> columnsList;
 
     public void validate() {
 
+    }
+
+    @Setter
+    @Getter
+    public static class Columns {
+
+        private String columnName;
+
+        private int mockType;
     }
 }

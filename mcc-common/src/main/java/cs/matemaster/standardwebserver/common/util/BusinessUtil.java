@@ -21,7 +21,11 @@ public final class BusinessUtil {
     }
 
     public static int getQueryOffset(int totalCount, int size) {
-        return totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
+        throw new UnsupportedOperationException("错误逻辑");
+    }
+
+    public static int getQueryStartIndex(int pageNo, int pageSize) {
+        return (pageNo - 1) * pageSize;
     }
 
     public static String kebabToUpperCamel(String kebabCase) {
@@ -64,5 +68,13 @@ public final class BusinessUtil {
             builder.append(StringUtils.capitalize(split[i]));
         }
         return builder.toString();
+    }
+
+    public static String buildSQLLikeStr(String arg) {
+        if (StringUtils.isBlank(arg)) {
+            return arg;
+        }
+
+        return "%" + arg + "%";
     }
 }

@@ -1,5 +1,6 @@
 package cs.matemaster.standardwebserver.app.collaborator;
 
+import cs.matemaster.standardwebserver.common.model.dto.ColumnSchemaDto;
 import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -137,7 +138,7 @@ public class MySQLSyntaxGenerator {
         return builder.toString();
     }
 
-    public String getInsertDataSQL(List<Map<String, Object>> data) {
+    public String getInsertDataSQL(ColumnSchemaDto columnSchemaDto,List<Map<String, Object>> data) {
         return null;
     }
 }

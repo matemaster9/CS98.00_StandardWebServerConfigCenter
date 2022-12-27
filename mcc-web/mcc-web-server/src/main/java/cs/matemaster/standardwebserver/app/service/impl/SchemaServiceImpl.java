@@ -8,6 +8,7 @@ import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import cs.matemaster.standardwebserver.common.model.po.TableSchemaPO;
 import cs.matemaster.standardwebserver.common.model.request.TableSchemaPagingQuery;
 import cs.matemaster.standardwebserver.common.model.vo.TableSchemaVO;
+import cs.matemaster.standardwebserver.common.util.BusinessUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,8 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     @Override
-    public List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int offset) {
-        return tableSchemaInfoMapper.findTableSchemaByPagingQuery(query, offset);
+    public List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int start, int offset) {
+        query.setName(BusinessUtil.buildSQLLikeStr(query.getName()));
+        return tableSchemaInfoMapper.findTableSchemaByPagingQuery(query, start, offset);
     }
 }

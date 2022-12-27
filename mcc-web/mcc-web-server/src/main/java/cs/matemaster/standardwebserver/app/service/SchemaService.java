@@ -16,5 +16,5 @@ public interface SchemaService {
 
     int getTableSchemaTotalCount();
 
-    List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int offset);
+    List<TableSchemaVO> pagingTableSchema(TableSchemaPagingQuery query, int start, int offset);
 }
