@@ -4,7 +4,8 @@ import cs.matemaster.standardwebserver.common.model.dto.TableSchemaDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 /**
  * @author matemaster
@@ -23,18 +24,24 @@ public class TableSchemaPO {
 
     private String createIndexSQL;
 
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
-    private LocalDate updateTime;
+    private LocalDateTime updateTime;
 
     private boolean deleteFlag;
 
     public void init(TableSchemaDto tableSchemaDto, String createTableSQL, String createIndexSQL) {
+        String columnsStr = tableSchemaDto.getColumnList()
+                .stream()
+                .map(TableSchemaDto.Columns::getColumnName)
+                .collect(Collectors.joining(","));
+
+        setColumns(columnsStr);
         setTableName(tableSchemaDto.getTableName());
         setCreateTableSQL(createTableSQL);
         setCreateIndexSQL(createIndexSQL);
-        setCreateTime(LocalDate.now());
-        setUpdateTime(LocalDate.now());
+        setCreateTime(LocalDateTime.now());
+        setUpdateTime(LocalDateTime.now());
         setDeleteFlag(false);
     }
 }

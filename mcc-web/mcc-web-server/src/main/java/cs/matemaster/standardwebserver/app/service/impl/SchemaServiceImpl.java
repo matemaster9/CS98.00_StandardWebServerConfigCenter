@@ -33,6 +33,7 @@ public class SchemaServiceImpl implements SchemaService {
         try {
             tableSchemaInfoMapper.insertTableSchema(tableSchemaPO);
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new BaseTransactionException(AppErrorEnum.STORE_TABLE_SCHEMA_ERROR);
         }
         log.info("保存成功 table_name: {} create_time: {}", tableSchemaDto.getTableName(), tableSchemaPO.getCreateTime());
