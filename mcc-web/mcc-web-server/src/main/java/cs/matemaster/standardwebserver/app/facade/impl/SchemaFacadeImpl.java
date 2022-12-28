@@ -61,7 +61,7 @@ public class SchemaFacadeImpl implements SchemaFacade {
         request.validate();
         ColumnSchemaDto columnSchemaDto = new ColumnSchemaDto();
         columnSchemaDto.assemble(request);
-        List<Map<String, Object>> simulatedData = simulatedDataGenerator.getColumnDataList(columnSchemaDto);
+        List<Map<String, String>> simulatedData = simulatedDataGenerator.getColumnDataList(columnSchemaDto);
         String insertDataSQL = mySQLSyntaxGenerator.getInsertDataSQL(columnSchemaDto, simulatedData);
         String jsonSimulatedData = JsonUtil.pretty(JsonUtil.serialize(simulatedData));
 

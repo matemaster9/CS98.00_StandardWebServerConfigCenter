@@ -138,7 +138,17 @@ public class MySQLSyntaxGenerator {
         return builder.toString();
     }
 
-    public String getInsertDataSQL(ColumnSchemaDto columnSchemaDto,List<Map<String, Object>> data) {
-        return null;
+    public String getInsertDataSQL(ColumnSchemaDto columnSchemaDto, List<Map<String, String>> data) {
+        String insertSQLTemplate = "insert into {0} ({1}) values ({3})";
+        String tableName = columnSchemaDto.getTable();
+        String columns = String.join(",", columnSchemaDto.getColumns().keySet());
+        String insertData = data.stream().map(this::buildInsertData).collect(Collectors.joining(","));
+        return MessageFormat.format(insertSQLTemplate, tableName, columns, insertData);
     }
+
+    private String buildInsertData(Map<String, String> item) {
+        return item.values().stream().collect(Collectors.joining(",", "(", ")"));
+    }
+
+
 }

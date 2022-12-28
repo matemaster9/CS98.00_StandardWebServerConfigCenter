@@ -16,7 +16,7 @@ public class MockSchemaVO {
     private String insertDataSQL;
 
     @Schema(description = "模拟数据")
-    private List<Map<String, Object>> simulatedData;
+    private List<Map<String, String>> simulatedData;
 
     @Schema(description = "json格式的模拟数据")
     private String jsonSimulatedData;

@@ -15,12 +15,12 @@ import java.util.Map;
  */
 @Component
 public class SimulatedDataGenerator {
-    public List<Map<String, Object>> getColumnDataList(ColumnSchemaDto columnSchemaDto) {
+    public List<Map<String, String>> getColumnDataList(ColumnSchemaDto columnSchemaDto) {
         Map<String, Integer> columns = columnSchemaDto.getColumns();
 
-        List<Map<String, Object>> result = Lists.newArrayList();
+        List<Map<String, String>> result = Lists.newArrayList();
         for (int i = 0; i < 20; i++) {
-            Map<String, Object> item = Maps.newHashMap();
+            Map<String, String> item = Maps.newHashMap();
             for (Map.Entry<String, Integer> entry : columns.entrySet()) {
                 Integer mockType = entry.getValue();
                 String mockData = DataFakerUtil.getRandomValue(MockDataTypeEnum.getInstanceByCode(mockType));
