@@ -30,7 +30,7 @@ public class TableSchemaPO {
 
     private boolean deleteFlag;
 
-    public void init(TableSchemaDto tableSchemaDto, String createTableSQL, String createIndexSQL) {
+    public void assemble(TableSchemaDto tableSchemaDto, String createTableSQL, String createIndexSQL) {
         String columnsStr = tableSchemaDto.getColumnList()
                 .stream()
                 .map(TableSchemaDto.Columns::getColumnName)

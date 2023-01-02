@@ -30,7 +30,7 @@ public class SchemaServiceImpl implements SchemaService {
     @Transactional(rollbackFor = BaseTransactionException.class)
     public void persistTableSchemaInfo(TableSchemaDto tableSchemaDto, String tableSQL, String indexSQL) {
         TableSchemaPO tableSchemaPO = new TableSchemaPO();
-        tableSchemaPO.init(tableSchemaDto, tableSQL, indexSQL);
+        tableSchemaPO.assemble(tableSchemaDto, tableSQL, indexSQL);
         try {
             tableSchemaInfoMapper.insertTableSchema(tableSchemaPO);
         } catch (Exception e) {
