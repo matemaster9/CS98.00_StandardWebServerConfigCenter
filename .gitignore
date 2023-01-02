@@ -18,3 +18,4 @@ mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml
 /mcc-tech/mcc-tech-rabbitmq/target/
 /mcc-infrastructure/mcc-infrastructure-kafka/target/
 /mcc-infrastructure/mcc-infrastructure-rabbitmq/target/
+/mcc-tech/mcc-tech-es/target/
