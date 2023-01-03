@@ -21,8 +21,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <groupId>cs.matemaster</groupId>
+            <artifactId>mcc-infrastructure-elasticsearch</artifactId>
         </dependency>
 
         <dependency>
