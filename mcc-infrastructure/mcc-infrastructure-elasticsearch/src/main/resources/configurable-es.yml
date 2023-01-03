@@ -5,4 +5,4 @@ infrastructure:
     password: es-password
     port: 9200
     address: es-server.ip
-    scheme: https
+    scheme: https/http
