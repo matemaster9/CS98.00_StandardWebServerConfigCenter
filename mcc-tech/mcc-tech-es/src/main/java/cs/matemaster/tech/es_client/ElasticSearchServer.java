@@ -1,6 +1,8 @@
 package cs.matemaster.tech.es_client;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.VersionType;
+import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
@@ -16,6 +18,7 @@ import org.apache.http.ssl.SSLContexts;
 import org.elasticsearch.client.RestClient;
 
 import javax.net.ssl.SSLContext;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author matemaster
@@ -25,7 +28,7 @@ public class ElasticSearchServer {
     private static final ElasticsearchClient esClient;
 
     public static void main(String[] args) {
-        searchAPI();
+        indexAPI();
     }
 
     @SneakyThrows
@@ -37,7 +40,14 @@ public class ElasticSearchServer {
         System.out.println(response.hits().hits().get(0).source());
     }
 
-
+    static void indexAPI() {
+        IndexRequest<KibanaSampleDataLog> of = IndexRequest.of(builder -> builder
+                .index(ElasticsearchConst.kibana_sample_data_ecommerce)
+                .versionType(VersionType.External)
+                .document(new KibanaSampleDataLog())
+                .id(String.valueOf(ThreadLocalRandom.current().nextGaussian())));
+        System.out.println(of);
+    }
 
 
     static {
