@@ -2,12 +2,19 @@ package cs.matemaster.standardwebserver.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author matemaster
  */
 public final class BusinessUtil {
+
+    private static final String ALPHABET_NUMBER = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
 
     private BusinessUtil() {
     }
@@ -76,5 +83,27 @@ public final class BusinessUtil {
         }
 
         return "%" + arg + "%";
+    }
+
+    public static String getBizSequence(String prefix) {
+        if (StringUtils.isBlank(prefix)) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder();
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String randomString = getRandomString();
+
+        return builder.append(prefix).append(timestamp).append(randomString).toString();
+    }
+
+    private static String getRandomString() {
+        int limit = 9;
+        StringBuilder builder = new StringBuilder(limit);
+        char[] chars = ALPHABET_NUMBER.toCharArray();
+        for (int i = 0; i < limit; i++) {
+            builder.append(chars[threadLocalRandom.nextInt(0, chars.length)]);
+        }
+        return builder.toString();
     }
 }

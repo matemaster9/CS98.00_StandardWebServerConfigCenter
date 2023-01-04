@@ -7,12 +7,10 @@ import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -41,6 +39,20 @@ public final class EasyExcelUtil {
         }
         EasyExcelFactory
                 .write(response.getOutputStream())
+                .head(head)
+                .sheet()
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
+                .doWrite(data);
+    }
+
+    public static void exportExcelImMemory(String filename, List<List<String>> head, List<List<Object>> data) throws IOException {
+        HttpServletResponse response = getHttpServletResponse(filename);
+        if (response == null) {
+            return;
+        }
+        EasyExcelFactory
+                .write(response.getOutputStream())
+                .inMemory(Boolean.TRUE)
                 .head(head)
                 .sheet()
                 .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())

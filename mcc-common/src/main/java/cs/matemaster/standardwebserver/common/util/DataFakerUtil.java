@@ -7,8 +7,11 @@ import net.datafaker.providers.base.Address;
 import net.datafaker.providers.base.Job;
 import net.datafaker.providers.base.Name;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author matemaster
@@ -17,6 +20,8 @@ public final class DataFakerUtil {
 
     private static final Faker zhCNFaker = new Faker(Locale.CHINA);
     private static final Faker enFaker = new Faker(Locale.ENGLISH);
+
+    private static final ThreadLocalRandom localRandom = ThreadLocalRandom.current();
 
     private static final Map<Class<?>, Object> zhCNFakerMap;
     private static final Map<Class<?>, Object> enFakerMap;
@@ -37,6 +42,26 @@ public final class DataFakerUtil {
             default:
                 return null;
         }
+    }
+
+    public static int getRandomInteger(int origin, int bound) {
+        return localRandom.nextInt(origin, bound);
+    }
+
+    public static String getRandomDeptId() {
+        StringBuilder builder = new StringBuilder(5);
+        for (int i = 0, limit = 5; i < 5; i++) {
+            builder.append(getRandomInteger(0, 9));
+        }
+        return builder.toString();
+    }
+
+    public static BigDecimal getRandomBigDecimal(String origin, String bound) {
+        double originDouble = Double.parseDouble(origin);
+        double boundDouble = Double.parseDouble(bound);
+
+        double randomDouble = localRandom.nextDouble(originDouble, boundDouble);
+        return BigDecimal.valueOf(randomDouble).setScale(2, RoundingMode.HALF_UP);
     }
 
     static {
