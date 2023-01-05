@@ -21,7 +21,7 @@ public class ActivityDataFunnelFacadeImpl implements ActivityDataFunnelFacade {
     @Override
     @SneakyThrows
     public void export() {
-        List<ActivityDataFunnelDto> activityDataFunnels = BusinessDataSimulator.getMockActivityDataFunnelList(120_000);
+        List<ActivityDataFunnelDto> activityDataFunnels = BusinessDataSimulator.getMockActivityDataFunnelList(210_000);
         List<List<String>> columnList = Lists.newArrayList();
         columnList.add(Collections.singletonList("活动编号"));
         columnList.add(Collections.singletonList("日期"));
@@ -55,6 +55,6 @@ public class ActivityDataFunnelFacadeImpl implements ActivityDataFunnelFacade {
             return dataList;
         }).collect(Collectors.toList());
 
-        EasyExcelUtil.exportExcelImMemory("活动数据漏斗12W模拟测试", columnList, data);
+        EasyExcelUtil.exportExcelInMemory("活动数据漏斗12W模拟测试", columnList, data);
     }
 }

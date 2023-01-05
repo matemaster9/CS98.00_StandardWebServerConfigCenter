@@ -45,7 +45,7 @@ public final class EasyExcelUtil {
                 .doWrite(data);
     }
 
-    public static void exportExcelImMemory(String filename, List<List<String>> head, List<List<Object>> data) throws IOException {
+    public static void exportExcelInMemory(String filename, List<List<String>> head, List<List<Object>> data) throws IOException {
         HttpServletResponse response = getHttpServletResponse(filename);
         if (response == null) {
             return;
