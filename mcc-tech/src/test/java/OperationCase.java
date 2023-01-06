@@ -1,4 +1,5 @@
 import cs.matemaster.effective_java.Operation;
+import cs.matemaster.effective_java.Operation2;
 import cs.matemaster.standardwebserver.common.util.DataFakerUtil;
 import org.junit.Test;
 
@@ -27,5 +28,32 @@ public class OperationCase {
         Operation elseThrow = operation.orElseThrow(() -> new IllegalArgumentException("非法操作"));
         double apply = elseThrow.apply(1.0, 2.0);
         System.out.println(apply);
+    }
+
+    @Test
+    public void operation2() {
+        double apply = Operation2.Modulo.apply(1, 2);
+        System.out.println(apply);
+    }
+
+    @Test
+    public void inverseOperation() {
+        Operation inverse = inverse(Operation.Plus);
+        System.out.println(inverse);
+    }
+
+    public static Operation inverse(Operation opr) {
+        switch (opr) {
+            case Plus:
+                return Operation.Minus;
+            case Minus:
+                return Operation.Plus;
+            case Times:
+                return Operation.Divide;
+            case Divide:
+                return Operation.Times;
+            default:
+                throw new AssertionError("unknown operation : " + opr);
+        }
     }
 }
