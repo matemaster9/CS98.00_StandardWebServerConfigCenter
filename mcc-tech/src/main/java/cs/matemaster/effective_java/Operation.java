@@ -49,7 +49,7 @@ public enum Operation {
 
     public abstract double apply(double x, double y);
 
-    public static Optional<Operation> fromString(String symbol) {
+    public static Optional<Operation> fromSymbol(String symbol) {
         return Optional.ofNullable(stringToEnum.get(symbol));
     }
 
@@ -57,6 +57,4 @@ public enum Operation {
     public String toString() {
         return symbol;
     }
-
-
 }
