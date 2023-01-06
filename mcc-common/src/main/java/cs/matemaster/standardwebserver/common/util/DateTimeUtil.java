@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
 import java.util.Date;
 
 /**
@@ -28,7 +28,11 @@ public final class DateTimeUtil {
         return Date.from(instant);
     }
 
-    public static String format(ChronoLocalDate datetime, String pattern) {
+    public static String format(ChronoLocalDate date, String pattern) {
+        return date.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    public static String format(ChronoLocalDateTime datetime, String pattern) {
         return datetime.format(DateTimeFormatter.ofPattern(pattern));
     }
 }

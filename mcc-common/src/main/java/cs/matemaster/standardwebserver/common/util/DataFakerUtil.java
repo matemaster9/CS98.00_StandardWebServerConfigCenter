@@ -21,7 +21,7 @@ public final class DataFakerUtil {
     private static final Faker zhCNFaker = new Faker(Locale.CHINA);
     private static final Faker enFaker = new Faker(Locale.ENGLISH);
 
-    private static final ThreadLocalRandom localRandom = ThreadLocalRandom.current();
+    public static final ThreadLocalRandom localRandom = ThreadLocalRandom.current();
 
     private static final Map<Class<?>, Object> zhCNFakerMap;
     private static final Map<Class<?>, Object> enFakerMap;
@@ -50,7 +50,7 @@ public final class DataFakerUtil {
 
     public static String getRandomDeptId() {
         StringBuilder builder = new StringBuilder(5);
-        for (int i = 0, limit = 5; i < 5; i++) {
+        for (int i = 0, limit = 5; i < limit; i++) {
             builder.append(getRandomInteger(0, 9));
         }
         return builder.toString();

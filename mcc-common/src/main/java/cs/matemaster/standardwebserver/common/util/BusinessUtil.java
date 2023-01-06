@@ -3,7 +3,6 @@ package cs.matemaster.standardwebserver.common.util;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -91,7 +90,7 @@ public final class BusinessUtil {
         }
 
         StringBuilder builder = new StringBuilder();
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String timestamp = DateTimeUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
         String randomString = getRandomString();
 
         return builder.append(prefix).append(timestamp).append(randomString).toString();
