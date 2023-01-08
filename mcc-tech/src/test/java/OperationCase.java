@@ -3,6 +3,7 @@ import cs.matemaster.effective_java.IOperation;
 import cs.matemaster.effective_java.Operation;
 import cs.matemaster.effective_java.Operation2;
 import cs.matemaster.effective_java.Operation3;
+import cs.matemaster.effective_java.OperationLambda;
 import cs.matemaster.standardwebserver.common.util.DataFakerUtil;
 import org.junit.Test;
 
@@ -56,6 +57,12 @@ public class OperationCase {
     public void inverseOperation() {
         Operation inverse = inverse(Operation.Plus);
         System.out.println(inverse);
+    }
+
+
+    @Test
+    public void operationLambda() {
+        System.out.println(OperationLambda.Plus.apply(1.0,2.0));
     }
 
     public static Operation inverse(Operation opr) {
