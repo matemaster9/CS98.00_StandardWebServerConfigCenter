@@ -9,9 +9,12 @@ import net.datafaker.providers.base.Name;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author matemaster
@@ -62,6 +65,14 @@ public final class DataFakerUtil {
 
         double randomDouble = localRandom.nextDouble(originDouble, boundDouble);
         return BigDecimal.valueOf(randomDouble).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public static List<Integer> getRandomList(int capacity) {
+        return IntStream
+                .generate(localRandom::nextInt)
+                .boxed()
+                .limit(capacity)
+                .collect(Collectors.toList());
     }
 
     static {
