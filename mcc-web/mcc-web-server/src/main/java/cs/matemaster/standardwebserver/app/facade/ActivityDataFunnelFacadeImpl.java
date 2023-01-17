@@ -37,24 +37,26 @@ public class ActivityDataFunnelFacadeImpl implements ActivityDataFunnelFacade {
         columnList.add(Collections.singletonList("中奖金额"));
         columnList.add(Collections.singletonList("领奖金额"));
 
-        List<List<Object>> data = activityDataFunnels.parallelStream().map(item -> {
-            List<Object> dataList = Lists.newArrayList();
-            dataList.add(item.getActivityId());
-            dataList.add(item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            dataList.add(item.getDeptName());
-            dataList.add(item.getViewCount());
-            dataList.add(item.getParticipantNumber());
-            dataList.add(item.getPrizeNumber());
-            dataList.add(item.getRecipientNumber());
-            dataList.add(item.getYmdParticipantNumber());
-            dataList.add(item.getYmdPrizeNumber());
-            dataList.add(item.getUseTicketNumber());
-            dataList.add(item.getRecipientTicketNumber());
-            dataList.add(item.getPrizeAmount());
-            dataList.add(item.getRecipientAmount());
-            return dataList;
-        }).collect(Collectors.toList());
+        List<List<Object>> data = activityDataFunnels.parallelStream().map(this::mapToDataList).collect(Collectors.toList());
 
         EasyExcelUtil.exportExcelInMemory("活动数据漏斗12W模拟测试", columnList, data);
+    }
+
+    private List<Object> mapToDataList(ActivityDataFunnelDto item) {
+        List<Object> dataList = Lists.newArrayList();
+        dataList.add(item.getActivityId());
+        dataList.add(item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        dataList.add(item.getDeptName());
+        dataList.add(item.getViewCount());
+        dataList.add(item.getParticipantNumber());
+        dataList.add(item.getPrizeNumber());
+        dataList.add(item.getRecipientNumber());
+        dataList.add(item.getYmdParticipantNumber());
+        dataList.add(item.getYmdPrizeNumber());
+        dataList.add(item.getUseTicketNumber());
+        dataList.add(item.getRecipientTicketNumber());
+        dataList.add(item.getPrizeAmount());
+        dataList.add(item.getRecipientAmount());
+        return dataList;
     }
 }
