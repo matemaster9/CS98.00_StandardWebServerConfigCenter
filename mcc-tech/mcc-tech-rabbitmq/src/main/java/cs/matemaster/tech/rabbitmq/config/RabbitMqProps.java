@@ -11,8 +11,8 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @Getter
 @ConstructorBinding
 @RequiredArgsConstructor
-@ConfigurationProperties(prefix = RabbitMqConfig.RABBIT_PREFIX)
-public class RabbitMqConfig {
+@ConfigurationProperties(prefix = RabbitMqProps.RABBIT_PREFIX)
+public class RabbitMqProps {
 
     public static final String RABBIT_PREFIX = "infrastructure.rabbit-mq";
 

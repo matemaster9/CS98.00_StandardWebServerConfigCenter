@@ -26,11 +26,11 @@ import javax.net.ssl.SSLContext;
 @Slf4j
 @Configuration
 @AllArgsConstructor
-@EnableConfigurationProperties({ElasticSearchProps.class})
-@ConditionalOnProperty(value = "infrastructure.elasticsearch.enable", havingValue = "true")
-public class ElasticSearchConfig {
+@EnableConfigurationProperties({ElasticsearchProps.class})
+@ConditionalOnProperty(value = "ElasticsearchProps", havingValue = "true")
+public class ElasticsearchConfig {
 
-    private final ElasticSearchProps elasticSearchProps;
+    private final ElasticsearchProps elasticSearchProps;
 
     @Bean
     public ElasticsearchClient elasticsearchClient() {
