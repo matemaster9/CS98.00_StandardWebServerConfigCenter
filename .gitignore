@@ -18,6 +18,7 @@
 /mcc-tech/mcc-tech-sign/target/
 /mcc-tech/mcc-tech-rabbitmq/target/
 mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml
+/mcc-tech/mcc-tech-jdk8/target/
 
 # mcc-web
 /mcc-web/target/
