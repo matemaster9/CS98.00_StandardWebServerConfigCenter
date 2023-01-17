@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/StandardWebServerConfigCenter
+    url: jdbc:mysql://124.223.52.246:3306/StandardWebServerConfigCenter
     username: root
     password: matemaster98
     driver-class-name: com.mysql.cj.jdbc.Driver
