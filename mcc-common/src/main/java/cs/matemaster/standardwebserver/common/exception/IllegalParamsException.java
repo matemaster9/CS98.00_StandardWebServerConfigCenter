@@ -20,6 +20,16 @@ public class IllegalParamsException extends RuntimeException {
         extraMessage = null;
     }
 
+    public IllegalParamsException(IErrorCode errorCode) {
+        this.errorCode = errorCode;
+        this.extraMessage = "";
+    }
+
+    public IllegalParamsException(IErrorCode errorCode, String extraMessage) {
+        this.errorCode = errorCode;
+        this.extraMessage = extraMessage;
+    }
+
     public IllegalParamsException(String extraMessage) {
         super(ErrorEnum.ILLEGAL_PARAMETER.getMessage());
         this.errorCode = ErrorEnum.ILLEGAL_PARAMETER;

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://124.223.52.246:3306/StandardWebServerConfigCenter
+    username: root
+    password: matemaster98
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 10
+      pool-name: HikariCP
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      connection-test-query: 'select 1'

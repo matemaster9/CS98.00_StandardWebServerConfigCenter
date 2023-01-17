@@ -20,4 +20,7 @@ public class PageDataView<T> {
 
     @Schema(description = "数据")
     private T data;
+
+    @Schema(description = "数据总数")
+    private int totalCount;
 }

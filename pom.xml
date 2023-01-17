@@ -15,6 +15,7 @@
         <module>mcc-web-config-center</module>
         <module>mcc-infrastructure</module>
         <module>mcc-tech</module>
+        <module>mcc-tech/mcc-tech-jdk8</module>
     </modules>
 
     <properties>
@@ -22,6 +23,7 @@
         <lombok.version>1.18.24</lombok.version>
         <springboot.version>2.7.6</springboot.version>
         <jakarta-json.version>2.0.1</jakarta-json.version>
+        <snakeyaml.version>1.33</snakeyaml.version>
     </properties>
 
     <dependencyManagement>
@@ -69,6 +71,12 @@
                 <groupId>jakarta.json</groupId>
                 <artifactId>jakarta.json-api</artifactId>
                 <version>${jakarta-json.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
