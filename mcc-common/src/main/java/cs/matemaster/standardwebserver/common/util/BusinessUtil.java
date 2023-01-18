@@ -1,10 +1,12 @@
 package cs.matemaster.standardwebserver.common.util;
 
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author matemaster
@@ -104,5 +106,10 @@ public final class BusinessUtil {
             builder.append(chars[threadLocalRandom.nextInt(0, chars.length)]);
         }
         return builder.toString();
+    }
+
+    @SneakyThrows
+    public static void sleep(long timeout, TimeUnit unit) {
+        unit.sleep(timeout);
     }
 }
