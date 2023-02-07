@@ -1,11 +1,15 @@
 package cs.matemaster.jdk;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * @author matemaster
  */
+@BenchmarkMode(value = Mode.AverageTime)
 public class StringJoinTest {
 
     @Benchmark
@@ -20,6 +24,7 @@ public class StringJoinTest {
     }
 
     @Benchmark
+    @Measurement(iterations = 1, time = 1)
     public void measureStringBuild(Blackhole bh) {
         StringBuilder builder = new StringBuilder(1000);
 
