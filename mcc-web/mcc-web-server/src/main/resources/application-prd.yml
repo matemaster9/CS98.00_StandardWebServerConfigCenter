@@ -14,6 +14,8 @@ spring:
       pool-name: HikariCP
       driver-class-name: com.mysql.cj.jdbc.Driver
       connection-test-query: 'select 1'
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration
 
 
 infrastructure:
