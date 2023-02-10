@@ -19,10 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 public class ConfigApplication {
     public static void main(String[] args) {
 
-        /** SpringBootApplication静态方法启动
-         *
+        /**
+         * <p>
+         * SpringBootApplication静态方法启动
          * SpringApplication.run(ConfigApplication.class, args);
-         *
+         * </p>
          */
 
         // 创建SpringApplication实例
