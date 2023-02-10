@@ -13,7 +13,6 @@ public class LearnApplicationInitializer implements ApplicationContextInitialize
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        int beanDefinitionCount = applicationContext.getBeanDefinitionCount();
-        System.out.println("此spring-boot应用公加载bean：" + beanDefinitionCount + "个");
+        System.out.println("容器刷新前的bean个数：" + applicationContext.getBeanDefinitionCount());
     }
 }
