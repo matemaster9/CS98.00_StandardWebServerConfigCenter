@@ -61,7 +61,8 @@ public class SignatureServiceImpl implements SignatureService {
         sysToken.setAccessToken(accessToken);
         sysToken.setRefreshToken(refreshToken);
 
-        redisClientSupport.setExpiredMessage(JsonWebConst.RedisPrefix, (String) refreshPayload.get("jti"), JsonUtil.serialize(sysToken), JsonWebConst.SysTokenExpireTime);
+        redisClientSupport.setExpiredMessage(JsonWebConst.RedisPrefix, (String) refreshPayload.get("jti"),
+                JsonUtil.serialize(sysToken), JsonWebConst.SysTokenExpireTime);
         return accessToken;
     }
 
@@ -76,7 +77,8 @@ public class SignatureServiceImpl implements SignatureService {
         SysToken token = JsonUtil.deserialize(sysToken, SysToken.class);
         Map<String, Object> claims = jsonWebTokenSupport.verify(Objects.requireNonNull(token).getRefreshToken());
         if (BusinessUtil.isFalse(StringUtils.equals(tokenId, (String) claims.get("jti"))) ||
-                BusinessUtil.isFalse(StringUtils.equals((String) payload.get(JsonWebConst.SysUserClaim), (String) claims.get(JsonWebConst.SysUserClaim)))) {
+                BusinessUtil.isFalse(StringUtils.equals((String) payload.get(JsonWebConst.SysUserClaim),
+                        (String) claims.get(JsonWebConst.SysUserClaim)))) {
             throw new BaseBusinessException("用户信息不匹配");
         }
 

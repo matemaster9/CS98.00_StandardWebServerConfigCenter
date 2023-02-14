@@ -17,7 +17,8 @@ public final class BusinessDataSimulator {
         return Stream.generate(() -> {
                     ActivityDataFunnelDto activityDataFunnelDto = new ActivityDataFunnelDto();
                     activityDataFunnelDto.setActivityId(BusinessUtil.getBizSequence("ACT"));
-                    activityDataFunnelDto.setDate(LocalDate.of(2022, DataFakerUtil.getRandomInteger(9, 11), DataFakerUtil.getRandomInteger(1, 30)));
+                    activityDataFunnelDto.setDate(LocalDate.of(2022, DataFakerUtil.getRandomInteger(9, 11),
+                            DataFakerUtil.getRandomInteger(1, 30)));
                     activityDataFunnelDto.setDeptId(DataFakerUtil.getRandomDeptId());
                     activityDataFunnelDto.setDeptName(DataFakerUtil.getRandomValue(MockDataTypeEnum.Job));
                     activityDataFunnelDto.setViewCount(DataFakerUtil.getRandomInteger(0, 100));
