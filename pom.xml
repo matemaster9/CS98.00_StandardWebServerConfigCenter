@@ -11,11 +11,8 @@
 
     <modules>
         <module>mcc-common</module>
-        <module>mcc-web</module>
-        <module>mcc-web-config-center</module>
         <module>mcc-infrastructure</module>
         <module>mcc-tech</module>
-        <module>standard-case</module>
     </modules>
 
     <properties>
