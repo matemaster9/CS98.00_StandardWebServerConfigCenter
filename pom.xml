@@ -13,6 +13,7 @@
         <module>mcc-common</module>
         <module>mcc-infrastructure</module>
         <module>mcc-tech</module>
+        <module>mcc-biz</module>
     </modules>
 
     <properties>
