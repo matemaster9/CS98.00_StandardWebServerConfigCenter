@@ -15,7 +15,7 @@
         <module>mcc-web-config-center</module>
         <module>mcc-infrastructure</module>
         <module>mcc-tech</module>
-        <module>mcc-tech/mcc-tech-jdk8</module>
+        <module>standard-case</module>
     </modules>
 
     <properties>

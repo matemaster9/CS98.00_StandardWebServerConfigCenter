@@ -19,6 +19,7 @@
         <module>mcc-tech-mock</module>
         <module>mcc-tech-config</module>
         <module>mcc-tech-rabbitmq</module>
+        <module>mcc-tech-jdk8</module>
     </modules>
 
     <properties>
