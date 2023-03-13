@@ -7,6 +7,6 @@ public class LimiterTestCase {
 
     @Test
     void test1() {
-        LimitingCase.guavaRateLimiter();
+        LimitingCase.permitsPerSecond();
     }
 }
