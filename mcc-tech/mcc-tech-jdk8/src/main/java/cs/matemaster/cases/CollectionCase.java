@@ -44,6 +44,9 @@ public class CollectionCase {
         team.forEach(log::info);
     }
 
+    /**
+     * 大根堆、小根堆
+     */
     public static void priorityQueue() {
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Queue<String> alphabetK = new PriorityQueue<>(16, Comparator.reverseOrder());

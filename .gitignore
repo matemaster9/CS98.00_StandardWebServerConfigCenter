@@ -20,6 +20,7 @@
 mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml
 /mcc-tech/mcc-tech-jdk8/target/
 /mcc-tech/mcc-tech-es/target/
+/mcc-tech/mcc-ribbit-book/target/
 
 # mcc-web
 /mcc-web/target/

@@ -20,6 +20,7 @@
         <module>mcc-tech-config</module>
         <module>mcc-tech-rabbitmq</module>
         <module>mcc-tech-jdk8</module>
+        <module>mcc-ribbit-book</module>
     </modules>
 
     <properties>
