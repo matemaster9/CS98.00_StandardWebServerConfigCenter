@@ -1,3 +1,5 @@
+package cs.matemaster.cases;
+
 import com.google.common.util.concurrent.RateLimiter;
 
 import java.time.LocalDateTime;

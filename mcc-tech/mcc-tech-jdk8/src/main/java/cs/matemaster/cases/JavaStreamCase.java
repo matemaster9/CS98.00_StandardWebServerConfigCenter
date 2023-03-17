@@ -1,3 +1,5 @@
+package cs.matemaster.cases;
+
 import com.google.common.base.Stopwatch;
 
 import java.util.Collections;

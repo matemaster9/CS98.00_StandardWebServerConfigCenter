@@ -1,3 +1,6 @@
+package cs.matemaster.test;
+
+import cs.matemaster.cases.BigNumberCase;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,3 +1,5 @@
+package cs.matemaster.cases;
+
 import java.math.BigInteger;
 
 /**

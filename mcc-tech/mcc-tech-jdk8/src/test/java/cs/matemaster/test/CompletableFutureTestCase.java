@@ -1,3 +1,5 @@
+package cs.matemaster.test;
+
 import org.junit.Test;
 
 /**

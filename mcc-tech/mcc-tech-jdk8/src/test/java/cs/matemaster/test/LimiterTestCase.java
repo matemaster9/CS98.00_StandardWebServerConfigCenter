@@ -1,3 +1,6 @@
+package cs.matemaster.test;
+
+import cs.matemaster.cases.LimitingCase;
 import org.junit.jupiter.api.Test;
 
 /**
