@@ -1,4 +1,4 @@
-package cs.matemaster.rabbit_book.bean;
+package cs.matemaster.rabbit_book.spring.bean;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
@@ -10,6 +10,10 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
+ * spring bean生命周期回调的方式
+ * 1. @Bean(initMethod = "", destroyMethod = "")
+ * 2. 实现接口 InitializingBean, DisposableBean
+ * 3. 使用注解 @PostConstruct & @PreDestroy
  * @author matemaster
  */
 @Slf4j
