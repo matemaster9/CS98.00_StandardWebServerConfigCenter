@@ -12,4 +12,14 @@ public class CollectionTestCase {
     void test() {
         CollectionCase.treeSet();
     }
+
+    @Test
+    void test2() {
+        CollectionCase.arrayDeque();
+    }
+
+    @Test
+    void test3() {
+        CollectionCase.priorityQueue();
+    }
 }

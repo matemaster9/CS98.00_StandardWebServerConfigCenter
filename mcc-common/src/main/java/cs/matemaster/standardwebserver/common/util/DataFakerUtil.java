@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author matemaster
@@ -72,6 +73,13 @@ public final class DataFakerUtil {
                 .generate(localRandom::nextInt)
                 .boxed()
                 .limit(capacity)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getNameList(int size, Locale locale) {
+        Faker faker = new Faker(locale);
+        return Stream.generate(() -> faker.name().username())
+                .limit(size)
                 .collect(Collectors.toList());
     }
 
