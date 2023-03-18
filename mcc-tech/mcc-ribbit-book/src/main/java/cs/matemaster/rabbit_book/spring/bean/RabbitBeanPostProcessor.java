@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
+ * 实现BeanPostProcessor接口，完成bean的前置后置操作，定制化bean
  * @author matemaster
  */
 @Slf4j
