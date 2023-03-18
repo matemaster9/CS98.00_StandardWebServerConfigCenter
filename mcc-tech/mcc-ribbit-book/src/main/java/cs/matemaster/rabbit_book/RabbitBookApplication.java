@@ -7,11 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.retry.annotation.EnableRetry;
 
 /**
+ * 注解@EnableRetry开启重试机制
  * @author matemaster
  */
 @Slf4j
+@EnableRetry
 @RequiredArgsConstructor
 @SpringBootApplication
 public class RabbitBookApplication {
