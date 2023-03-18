@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
+ * implements ApplicationContextAware 完成bean对容器的感知
  * @author matemaster
  */
 @Slf4j
@@ -20,8 +21,8 @@ public class RabbitContextAwareComponent implements ApplicationContextAware {
         context = applicationContext;
     }
 
-    public void printApplicationNameToConsole() {
-        String applicationName = context.getApplicationName();
-        log.info("ApplicationName: {}", applicationName);
+    public void printContextDisplayNameToConsole() {
+        String displayName = context.getDisplayName();
+        log.info("ContextDisplayName: {}", displayName);
     }
 }
