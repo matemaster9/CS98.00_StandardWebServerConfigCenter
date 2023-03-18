@@ -19,15 +19,25 @@ public class RabbitBookApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(RabbitBookApplication.class);
-        checkRabbiContextAwareComponent(run);
-        checkRabbitBeanPostProcessor(run);
+        /*
+         * checkRabbiContextAwareComponent(run);
+         * checkRabbitBeanPostProcessor(run);
+         */
     }
 
+    /**
+     * 校验感知接口实现
+     * @param configurableApplicationContext
+     */
     static void checkRabbiContextAwareComponent(ConfigurableApplicationContext configurableApplicationContext) {
         RabbitContextAwareComponent component = configurableApplicationContext.getBean(RabbitContextAwareComponent.class);
         component.printContextDisplayNameToConsole();
     }
 
+    /**
+     * 校验BeanPostProcessor使用
+     * @param configurableApplicationContext
+     */
     static void checkRabbitBeanPostProcessor(ConfigurableApplicationContext configurableApplicationContext) {
         RabbitBook rabbitBook = configurableApplicationContext.getBean(RabbitBook.class);
         log.info(rabbitBook.toString());
