@@ -7,6 +7,9 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 /**
+ * 注解@Retryable定义重试的条件和行为
+ * 注解@Recover定义重试失败后的回调行为
+ *
  * @author matemaster
  */
 @Slf4j
