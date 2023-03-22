@@ -2,21 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>mcc-master-cs</module>
-    </modules>
-
     <parent>
+        <artifactId>mcc-biz</artifactId>
         <groupId>cs.matemaster</groupId>
-        <artifactId>CS98.00_StandardWebServerConfigCenter</artifactId>
         <version>0.0.1</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mcc-biz</artifactId>
-    <description>业务模块：主攻工作业务难题记录</description>
+    <artifactId>mcc-master-cs</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -24,4 +17,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>
