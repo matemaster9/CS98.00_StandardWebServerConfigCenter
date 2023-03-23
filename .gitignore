@@ -30,3 +30,4 @@ mcc-tech/mcc-tech-sign/src/main/resources/application-prd.yml
 # mcc-web-config-center
 /mcc-web-config-center/target/
 /mcc-web-config-center/src/main/resources/application-prd.yml
+/mcc-biz/mcc-master-cs/target/
