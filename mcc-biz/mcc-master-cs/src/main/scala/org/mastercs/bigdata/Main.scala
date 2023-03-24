@@ -35,7 +35,7 @@ object Main {
         greetStrings.foreach(println)
     }
 
-    def m3() = {
+    def m3(): Unit = {
         val numbers = Array.apply(1, 2, 3, 4, 5)
         val lists = List.apply(1, 2, 3, 4, 5)
         val numbers2 = Array(1, 2, 3, 4, 5)

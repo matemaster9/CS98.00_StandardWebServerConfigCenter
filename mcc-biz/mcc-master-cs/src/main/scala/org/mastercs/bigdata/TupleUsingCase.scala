@@ -5,4 +5,7 @@ package org.mastercs.bigdata
  */
 object TupleUsingCase {
 
+  def m(): Unit = {
+
+  }
 }
