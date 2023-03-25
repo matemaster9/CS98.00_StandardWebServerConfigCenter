@@ -6,19 +6,19 @@ package org.mastercs.bigdata
  */
 object SetUsingCase {
 
-  def main(args: Array[String]): Unit = {
-    m()
-  }
+    def main(args: Array[String]): Unit = {
+        m()
+    }
 
-  def m() = {
-    var jetSet = Set("Boeing", "Airbus")
-    jetSet += "Lear"
-    println(jetSet.contains("Cessna"))
-  }
+    def m() = {
+        var jetSet = Set("Boeing", "Airbus")
+        jetSet += "Lear"
+        println(jetSet.contains("Cessna"))
+    }
 
-  def m2() = {
-    val movieSet = scala.collection.mutable.Set("Hitch", "Poltergeist")
-    movieSet += "Shrek"
-    println(movieSet)
-  }
+    def m2() = {
+        val movieSet = scala.collection.mutable.Set("Hitch", "Poltergeist")
+        movieSet += "Shrek"
+        println(movieSet)
+    }
 }

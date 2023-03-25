@@ -5,5 +5,5 @@ package org.mastercs.bigdata
  * @since 2023/3/25 
  */
 class Rational(n: Int, d: Int) {
-  require(d != 0)
+    require(d != 0)
 }

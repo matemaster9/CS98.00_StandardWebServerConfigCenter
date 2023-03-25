@@ -8,18 +8,18 @@ import java.io.{FileNotFoundException, FileReader, IOException}
  */
 object TryCatchCaseUsingCase {
 
-  def m() = {
+    def m() = {
 
-    var file;
-    try {
-      // use and close file
-      file = new FileReader("input.txt")
-    } catch {
-      case ex: FileNotFoundException => println(ex) // handle missing file
-      case ex: IOException => println(ex) // handle other I/O error
-    } finally {
-        // close file
-
+        var file: FileReader = null
+        try {
+            // use and close file
+            file = new FileReader("input.txt")
+        } catch {
+            case ex: FileNotFoundException => println(ex) // handle missing file
+            case ex: IOException => println(ex) // handle other I/O error
+        } finally {
+            // close file
+            file.close()
+        }
     }
-  }
 }
