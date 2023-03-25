@@ -13,6 +13,9 @@ public class ShiftWorkCase {
     static Thread t1 = null;
     static Thread t2 = null;
 
+    /**
+     * 线程交替打印1，-1，2，-2，3，-3，4，-4，5，-5, 6, -6, 7, -7, 8, -8, 9, -9, 10, -10
+     */
     public static void printAlternately() {
         List<Integer> list = IntStream
                 .iterate(1, i -> i + 1)
