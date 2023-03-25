@@ -9,9 +9,14 @@ import org.apache.flink.api.scala.{ExecutionEnvironment, createTypeInformation}
 object BatchWordCount {
 
     def main(args: Array[String]): Unit = {
+        val filePath = "D:\\Desktop\\CS98.00_StandardWebServerConfigCenter\\mcc-biz\\mcc-master-cs\\docs\\wc.txt";
+        batchOpr(filePath)
+    }
+
+    def batchOpr(filePath: String): Unit = {
         val env = ExecutionEnvironment.getExecutionEnvironment
-        val lineDataSet = env.readTextFile("D:\\Desktop\\CS98.00_StandardWebServerConfigCenter\\mcc-biz\\mcc-master-cs\\docs")
-        val value = lineDataSet.flatMap(_.split(""))
+        val lineDataSet = env.readTextFile(filePath)
+        val value = lineDataSet.flatMap(_.split(" "))
                 .map((_, 1))
         val value1 = value.groupBy(0)
                 .sum(1)
